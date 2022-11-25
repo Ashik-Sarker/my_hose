@@ -3,8 +3,23 @@ import { mainContext } from '../../App';
 import Http from '../../common/Http';
  
 const Navbar = () => {
-  const [info, setInfo] = useState({
+  const [land_lord, setLand_Lord] = useState({
      land_lord_picture: '',
+     land_lord_permanent_address: '',
+     owner_name: '',
+     father_name: '',
+     mother_name: '',
+     date_of_birth: '',
+     marital_status: '',
+     occupation: '',
+     religion: '',
+     education: '',
+     mobile: '',
+     email: '',
+     nid: '',
+     passport: '',
+     land_lord_form_submit_date: '',
+     land_lord_signature: ''
    })
 
   const {setIsLogin} = useContext(mainContext);
@@ -17,11 +32,58 @@ const Navbar = () => {
   const sendData = () => {
     const newFormData = new FormData()
     
-    newFormData.append('land_lord_picture', 'pic-1')
+    // newFormData.append('caretaker_name', 'caretaker_name-1')
+    // newFormData.append('driver_name', 'driver_name-1')
+    // newFormData.append('name', 'name-1')
+    // newFormData.append('member_name', 'member_name-1')
+    // newFormData.append('flat_name', 'flat_name-1')
+    // newFormData.append('servant_name', 'servant_name-1')
+    // newFormData.append('land_lord_picture', 'test-data')
 
-    Http.post('land-lord', newFormData).then(res => {
-      console.log("Response from land lord",res);
-    })
+
+    // newFormData.append('land_lord_permanent_address', 'test-data')
+    // newFormData.append('owner_name', 'test-data')
+    // newFormData.append('father_name', 'test-data')
+    // newFormData.append('mother_name', 'test-data')
+    // newFormData.append('date_of_birth', 'test-data')
+    // newFormData.append('marital_status', 'test-data')
+    // newFormData.append('occupation', 'test-data')
+    // newFormData.append('religion', 'test-data')
+    // newFormData.append('education', 'test-data')
+    // newFormData.append('mobile', 'test-data')
+    // newFormData.append('email', 'test-data')
+    // newFormData.append('nid', 'test-data')
+    // newFormData.append('passport', 'test-data')
+    // newFormData.append('land_lord_form_submit_date', 'test-data')
+    // newFormData.append('land_lord_signature', 'test-data')
+
+
+    // Http.post('land-lord', newFormData).then(res => {
+    //   console.log("Response from land lord",res);
+    // })
+
+    // Http.post('home-servant-details', newFormData).then(res => {
+    //   console.log("Response from Home servant",res);
+    // })
+
+    // Http.post('flat-details', newFormData).then(res => {
+    //   console.log("Response from Home flat details", res);
+    // })
+
+    // Http.post('family-member-details', newFormData).then(res => {
+    //   console.log("Response from Home family member details", res);
+    // })
+
+    // Http.post('emergency-contact', newFormData).then(res => {
+    //   console.log("Response from Emergency Contact details", res);
+    // })
+    // Http.post('driver-details', newFormData).then(res => {
+    //   console.log("Response from Driver Details details", res);
+    // })
+    
+    // Http.post('caretaker-details', newFormData).then(res => {
+    //   console.log("Response from caretaker details", res);
+    // })
 
 
    }
@@ -29,7 +91,7 @@ const Navbar = () => {
     return (
         <div>
         <header id="header" class="header fixed-top d-flex align-items-center">
-          <button onClick={sendData}>test</button>
+          {/* <button onClick={sendData}>test</button> */}
 
           <div class="d-flex align-items-center justify-content-between">
             <a href="" class="logo d-flex align-items-center">
