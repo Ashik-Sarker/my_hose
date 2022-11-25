@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CaretakerDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CaretakerDetailsController extends Controller
 {
@@ -14,7 +15,11 @@ class CaretakerDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $data = CaretakerDetails::OrderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -35,7 +40,40 @@ class CaretakerDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'caretaker_name' => 'required',
+                // 'nid' => 'required',
+                // 'mobile' => 'required',
+                // 'area' => 'required',
+
+            ],
+            [
+                'caretaker_name.required' => 'Required',
+                // 'nid.required' => 'Required',
+                // 'mobile.required' => 'Required',
+                // 'area.required' => 'Required',
+
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'error' => $validator->messages(),
+            ]);
+        } else {
+            $data = $request->all();
+
+            $datum = CaretakerDetails::create($data);
+            return response()->json([
+                'status' => 200,
+                'caretaker_details' => $datum,
+                'message' => 'Caretaker Details Added Successfully !',
+            ]);
+        };
     }
 
     /**

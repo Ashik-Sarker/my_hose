@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FamilyMembersDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FamilyMembersDetailsController extends Controller
 {
@@ -14,7 +15,11 @@ class FamilyMembersDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $data = FamilyMembersDetails::OrderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -35,7 +40,42 @@ class FamilyMembersDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'member_name' => 'required',
+                // 'occupation' => 'required',
+                // 'age' => 'required',
+                // 'mobile' => 'required',
+                // 'gender' => 'required'
+
+            ],
+            [
+                'member_name.required' => 'Required',
+                // 'occupation.required' => 'Required',
+                // 'age.required' => 'Required',
+                // 'mobile.required' => 'Required',
+                // 'gender.required' => 'Required',
+
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'error' => $validator->messages(),
+            ]);
+        } else {
+            $data = $request->all();
+
+            $datum = FamilyMembersDetails::create($data);
+            return response()->json([
+                'status' => 200,
+                'family_member_details' => $datum,
+                'message' => 'Family Member Added Successfully !',
+            ]);
+        };
     }
 
     /**

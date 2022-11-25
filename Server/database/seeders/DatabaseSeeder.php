@@ -22,8 +22,14 @@ class DatabaseSeeder extends Seeder
         // ]);
 
 
-        
+
         // \App\Models\LandLord::factory(50)->create();
+        // \App\Models\EmergencyContact::factory(50)->create();
+        // \App\Models\FamilyMembersDetails::factory(50)->create();
+        // \App\Models\CaretakerDetails::factory(50)->create();
+        // \App\Models\DriverDetails::factory(50)->create();
+        // \App\Models\FlatDetails::factory(50)->create();
+        // \App\Models\HomeServantDetails::factory(50)->create();
 
 
 

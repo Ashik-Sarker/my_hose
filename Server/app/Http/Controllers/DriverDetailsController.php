@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DriverDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DriverDetailsController extends Controller
 {
@@ -14,7 +15,11 @@ class DriverDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $data = DriverDetails::OrderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -35,7 +40,40 @@ class DriverDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'driver_name' => 'required',
+                // 'nid' => 'required',
+                // 'mobile' => 'required',
+                // 'area' => 'required',
+
+            ],
+            [
+                'driver_name.required' => 'Required',
+                // 'nid.required' => 'Required',
+                // 'mobile.required' => 'Required',
+                // 'area.required' => 'Required',
+
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'error' => $validator->messages(),
+            ]);
+        } else {
+            $data = $request->all();
+
+            $datum = DriverDetails::create($data);
+            return response()->json([
+                'status' => 200,
+                'driver_details' => $datum,
+                'message' => 'Driver Details Added Successfully !',
+            ]);
+        };
     }
 
     /**

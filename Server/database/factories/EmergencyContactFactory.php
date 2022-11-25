@@ -17,7 +17,12 @@ class EmergencyContactFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'relationship' => $this->faker->word(),
+            'nid' => $this->faker->randomDigit(),
+            'address' => $this->faker->word(),
+            'age' => $this->faker->randomDigit(),
+            'mobile' => $this->faker->randomDigit(),
         ];
     }
 }

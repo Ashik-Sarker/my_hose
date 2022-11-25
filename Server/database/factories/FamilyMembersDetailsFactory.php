@@ -17,7 +17,11 @@ class FamilyMembersDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'member_name' => $this->faker->word(),
+            'occupation' => $this->faker->word(),
+            'age' => $this->faker->randomDigit(),
+            'mobile' => $this->faker->randomDigit(),
+            'gender' => $this->faker->word(),
         ];
     }
 }

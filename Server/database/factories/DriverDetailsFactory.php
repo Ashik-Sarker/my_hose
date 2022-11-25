@@ -17,7 +17,10 @@ class DriverDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'driver_name' => $this->faker->word(),
+            'nid' => $this->faker->randomDigit(),
+            'mobile' => $this->faker->randomDigit(),
+            'area' => $this->faker->word(),
         ];
     }
 }

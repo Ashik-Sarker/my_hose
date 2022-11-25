@@ -17,7 +17,10 @@ class CaretakerDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'caretaker_name' => $this->faker->word(),
+            'nid' => $this->faker->randomDigit(),
+            'mobile' => $this->faker->randomDigit(),
+            'area' => $this->faker->word(),
         ];
     }
 }

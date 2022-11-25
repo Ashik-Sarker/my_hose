@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmergencyContact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EmergencyContactController extends Controller
 {
@@ -14,7 +15,11 @@ class EmergencyContactController extends Controller
      */
     public function index()
     {
-        //
+        $data = EmergencyContact::OrderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -35,7 +40,44 @@ class EmergencyContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                // 'relationship' => 'required',
+                // 'nid' => 'required',
+                // 'address' => 'required',
+                // 'age' => 'required',
+                // 'mobile' => 'required'
+
+            ],
+            [
+                'name.required' => 'Required',
+                // 'relationship.required' => 'Required',
+                // 'nid.required' => 'Required',
+                // 'address.required' => 'Required',
+                // 'age.required' => 'Required',
+                // 'mobile.required' => 'Required',
+
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'error' => $validator->messages(),
+            ]);
+        } else {
+            $data = $request->all();
+
+            $datum = EmergencyContact::create($data);
+            return response()->json([
+                'status' => 200,
+                'emergency_contact_details' => $datum,
+                'message' => 'Emergency Contact Added Successfully !',
+            ]);
+        };
     }
 
     /**

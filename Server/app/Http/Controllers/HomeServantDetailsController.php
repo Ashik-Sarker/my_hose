@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HomeServantDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HomeServantDetailsController extends Controller
 {
@@ -14,7 +15,11 @@ class HomeServantDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $data = HomeServantDetails::OrderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -35,7 +40,40 @@ class HomeServantDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'servant_name' => 'required',
+                // 'nid' => 'required',
+                // 'mobile' => 'required',
+                // 'area' => 'required',
+
+            ],
+            [
+                'servant_name.required' => 'Required',
+                // 'nid.required' => 'Required',
+                // 'mobile.required' => 'Required',
+                // 'area.required' => 'Required',
+
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'error' => $validator->messages(),
+            ]);
+        } else {
+            $data = $request->all();
+
+            $datum = HomeServantDetails::create($data);
+            return response()->json([
+                'status' => 200,
+                'home_servant_details' => $datum,
+                'message' => 'Home Servant Added Successfully !',
+            ]);
+        };
     }
 
     /**

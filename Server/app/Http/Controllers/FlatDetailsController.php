@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FlatDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FlatDetailsController extends Controller
 {
@@ -14,7 +15,11 @@ class FlatDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $data = FlatDetails::OrderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -35,7 +40,38 @@ class FlatDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'flat_name' => 'required',
+                // 'flat_renter_name' => 'required',
+                // 'referral_code' => 'required',
+
+            ],
+            [
+                'flat_name.required' => 'Required',
+                // 'flat_renter_name.required' => 'Required',
+                // 'referral_code.required' => 'Required',
+
+            ]
+        );
+
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'error' => $validator->messages(),
+            ]);
+        } else {
+            $data = $request->all();
+
+            $datum = FlatDetails::create($data);
+            return response()->json([
+                'status' => 200,
+                'flat_details' => $datum,
+                'message' => 'Flat Details Added Successfully !',
+            ]);
+        };
     }
 
     /**

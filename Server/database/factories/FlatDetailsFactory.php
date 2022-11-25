@@ -17,7 +17,9 @@ class FlatDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'flat_name' => $this->faker->word(),
+            'flat_renter_name' => $this->faker->word(),
+            'referral_code' => $this->faker->randomDigit(),
         ];
     }
 }

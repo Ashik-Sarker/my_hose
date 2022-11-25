@@ -17,7 +17,10 @@ class HomeServantDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'servant_name' => $this->faker->word(),
+            'nid' => $this->faker->randomDigit(),
+            'mobile' => $this->faker->randomDigit(),
+            'area' => $this->faker->randomDigit(),
         ];
     }
 }
