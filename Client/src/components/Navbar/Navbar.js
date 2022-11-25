@@ -1,18 +1,35 @@
- import React, { useContext } from 'react';
+ import React, { useContext, useState } from 'react';
 import { mainContext } from '../../App';
+import Http from '../../common/Http';
  
- const Navbar = () => {
+const Navbar = () => {
+  const [info, setInfo] = useState({
+     land_lord_picture: '',
+   })
 
   const {setIsLogin} = useContext(mainContext);
 
   const LogOut = () =>{
     setIsLogin(false);
 
-  }
+   }
+   
+  const sendData = () => {
+    const newFormData = new FormData()
+    
+    newFormData.append('land_lord_picture', 'pic-1')
+
+    Http.post('land-lord', newFormData).then(res => {
+      console.log("Response from land lord",res);
+    })
+
+
+   }
 
     return (
         <div>
-           <header id="header" class="header fixed-top d-flex align-items-center">
+        <header id="header" class="header fixed-top d-flex align-items-center">
+          <button onClick={sendData}>test</button>
 
           <div class="d-flex align-items-center justify-content-between">
             <a href="" class="logo d-flex align-items-center">
