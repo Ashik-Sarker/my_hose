@@ -44,12 +44,14 @@ class FlatDetailsController extends Controller
             $request->all(),
             [
                 'flat_name' => 'required',
+                // 'land_lord_master_id' => 'required',
                 // 'flat_renter_name' => 'required',
                 // 'referral_code' => 'required',
 
             ],
             [
                 'flat_name.required' => 'Required',
+                // 'land_lord_master_id.required' => 'Required',
                 // 'flat_renter_name.required' => 'Required',
                 // 'referral_code.required' => 'Required',
 

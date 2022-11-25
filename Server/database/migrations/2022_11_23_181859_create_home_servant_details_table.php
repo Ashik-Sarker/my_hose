@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('home_servant_details', function (Blueprint $table) {
             $table->id();
 
+            $table->string('land_lord_master_id')->nullable();
             $table->string('servant_name')->nullable();
             $table->string('nid')->nullable();
             $table->string('mobile')->nullable();

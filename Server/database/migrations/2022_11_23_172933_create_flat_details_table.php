@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('flat_details', function (Blueprint $table) {
             $table->id();
 
+            $table->string('land_lord_master_id')->nullable();
             $table->string('flat_name')->nullable();
             $table->string('flat_renter_name')->nullable();
             $table->string('referral_code')->nullable();

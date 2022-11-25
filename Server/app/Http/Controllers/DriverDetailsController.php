@@ -44,6 +44,7 @@ class DriverDetailsController extends Controller
             $request->all(),
             [
                 'driver_name' => 'required',
+                // 'land_lord_master_id' => 'required',
                 // 'nid' => 'required',
                 // 'mobile' => 'required',
                 // 'area' => 'required',
@@ -51,6 +52,7 @@ class DriverDetailsController extends Controller
             ],
             [
                 'driver_name.required' => 'Required',
+                // 'land_lord_master_id.required' => 'Required',
                 // 'nid.required' => 'Required',
                 // 'mobile.required' => 'Required',
                 // 'area.required' => 'Required',

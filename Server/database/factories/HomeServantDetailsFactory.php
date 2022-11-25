@@ -17,6 +17,7 @@ class HomeServantDetailsFactory extends Factory
     public function definition()
     {
         return [
+            // 'land_lord_master_id' => $this->faker->randomDigit(),
             'servant_name' => $this->faker->word(),
             'nid' => $this->faker->randomDigit(),
             'mobile' => $this->faker->randomDigit(),

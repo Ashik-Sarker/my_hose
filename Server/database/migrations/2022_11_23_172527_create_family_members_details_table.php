@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('family_members_details', function (Blueprint $table) {
             $table->id();
 
+            $table->string('land_lord_master_id')->nullable();
             $table->string('member_name')->nullable();
             $table->string('occupation')->nullable();
             $table->string('age')->nullable();

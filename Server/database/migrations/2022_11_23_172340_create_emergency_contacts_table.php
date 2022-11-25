@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('emergency_contacts', function (Blueprint $table) {
             $table->id();
 
+            $table->string('land_lord_master_id')->nullable();
             $table->string('name')->nullable();
             $table->string('relationship')->nullable();
             $table->string('nid')->nullable();

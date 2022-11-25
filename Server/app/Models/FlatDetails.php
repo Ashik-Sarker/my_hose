@@ -11,6 +11,7 @@ class FlatDetails extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'land_lord_master_id',
         'flat_name',
         'flat_renter_name',
         'referral_code'

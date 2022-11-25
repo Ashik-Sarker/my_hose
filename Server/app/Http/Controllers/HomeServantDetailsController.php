@@ -44,6 +44,7 @@ class HomeServantDetailsController extends Controller
             $request->all(),
             [
                 'servant_name' => 'required',
+                // 'land_lord_master_id' => 'required',
                 // 'nid' => 'required',
                 // 'mobile' => 'required',
                 // 'area' => 'required',
@@ -51,6 +52,7 @@ class HomeServantDetailsController extends Controller
             ],
             [
                 'servant_name.required' => 'Required',
+                // 'land_lord_master_id.required' => 'Required',
                 // 'nid.required' => 'Required',
                 // 'mobile.required' => 'Required',
                 // 'area.required' => 'Required',

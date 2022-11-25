@@ -11,6 +11,7 @@ class FamilyMembersDetails extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'land_lord_master_id',
         'member_name',
         'occupation',
         'age',

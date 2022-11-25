@@ -44,6 +44,7 @@ class FamilyMembersDetailsController extends Controller
             $request->all(),
             [
                 'member_name' => 'required',
+                // 'land_lord_master_id' => 'required',
                 // 'occupation' => 'required',
                 // 'age' => 'required',
                 // 'mobile' => 'required',
@@ -52,6 +53,7 @@ class FamilyMembersDetailsController extends Controller
             ],
             [
                 'member_name.required' => 'Required',
+                // 'land_lord_master_id.required' => 'Required',
                 // 'occupation.required' => 'Required',
                 // 'age.required' => 'Required',
                 // 'mobile.required' => 'Required',

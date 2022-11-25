@@ -11,6 +11,7 @@ class CaretakerDetails extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'land_lord_master_id',
         'caretaker_name',
         'nid',
         'mobile',

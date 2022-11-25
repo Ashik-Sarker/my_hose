@@ -11,6 +11,7 @@ class HomeServantDetails extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'land_lord_master_id',
         'servant_name',
         'nid',
         'mobile',

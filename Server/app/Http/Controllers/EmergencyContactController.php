@@ -44,6 +44,7 @@ class EmergencyContactController extends Controller
             $request->all(),
             [
                 'name' => 'required',
+                // 'land_lord_master_id' => 'required',
                 // 'relationship' => 'required',
                 // 'nid' => 'required',
                 // 'address' => 'required',
@@ -53,6 +54,7 @@ class EmergencyContactController extends Controller
             ],
             [
                 'name.required' => 'Required',
+                // 'land_lord_master_id.required' => 'Required',
                 // 'relationship.required' => 'Required',
                 // 'nid.required' => 'Required',
                 // 'address.required' => 'Required',

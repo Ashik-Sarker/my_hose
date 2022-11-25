@@ -11,6 +11,7 @@ class EmergencyContact extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'land_lord_master_id',
         'name',
         'relationship',
         'nid',
