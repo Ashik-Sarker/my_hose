@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 
 const AddLandLord = () => {
+
+  const [formData, setFormData] = useState([
+    {
+      land_lord: "",
+    },
+  ]);
+
+  const handleChangeTwo = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    setFormData({...formData,[e.target.name]:[e.target.value]})
+     
+  };
+
   const [yesVisible, setVisbleYes] = useState(false);
   const [noVisible, setVisbleNo] = useState(false);
   // const [yesvisible, setVisbleYes] = useState(false);
@@ -162,7 +176,7 @@ const AddLandLord = () => {
                               type="file"
                               className="     mt-5  "
                               name=" "
-                              style={{marginLeft:"25%"}}
+                              style={{ marginLeft: "25%" }}
                             />
                           </div>
                         </div>
@@ -343,10 +357,16 @@ const AddLandLord = () => {
                   <div class="col-lg-12">
                     <div class="row mb-3   align-items-center justify-content-center mt-2">
                       <div class="col-md-12 mb-3">
+                        <p>test</p>
                         <input
                           type="text"
                           class="form-control"
                           placeholder="Owner of Name"
+                          onChange={(e) => handleChangeTwo(e)}
+                          // onChange={console.log('test')}
+                          name="land_lord"
+                          value={formData.land_lord}
+                          
                         />
                       </div>
                       <div class="col-md-12 mb-3">
