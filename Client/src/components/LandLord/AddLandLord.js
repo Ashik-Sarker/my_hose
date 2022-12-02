@@ -4,7 +4,16 @@ const AddLandLord = () => {
 
   const [formData, setFormData] = useState([
     {
-      land_lord: "",
+      owner_name: "",
+      father_name:"",
+      mother_name:"",
+      date_of_birth:"",
+      marital_status:"",
+      occupation:"",
+      religion:"",
+      education:"",
+      mobile:"",
+      email:""
     },
   ]);
 
@@ -364,8 +373,8 @@ const AddLandLord = () => {
                           placeholder="Owner of Name"
                           onChange={(e) => handleChangeTwo(e)}
                           // onChange={console.log('test')}
-                          name="land_lord"
-                          value={formData.land_lord}
+                          name="owner_name"
+                          value={formData.owner_name}
                           
                         />
                       </div>
@@ -374,6 +383,10 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Fathers Name"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="father_name"
+                          value={formData.father_name}
+                          
                         />
                       </div>
                       <div class="col-md-12 mb-3">
@@ -381,6 +394,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Mothers Name"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="mother_name"
+                          value={formData.mother_name}
                         />
                       </div>
 
@@ -388,7 +404,11 @@ const AddLandLord = () => {
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Date of Birth"
+                          placeholder="Date of Birth(D-M-Y)"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="date_of_birth"
+                          value={formData.date}
+
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -396,6 +416,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Martial Satus"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="marital_status"
+                          value={formData.marital_status}
                         />
                       </div>
 
@@ -404,6 +427,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Occupation/Organization/Job Location"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="occupation"
+                          value={formData.occupation}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -411,6 +437,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Religion"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="religion"
+                          value={formData.religion}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -418,20 +447,32 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Educational Status"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="education"
+                          value={formData.education}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
                         <input
-                          type="text"
+                          type="number"
                           class="form-control"
                           placeholder="Mobile No"
+                          name="mobile"
+                          // onChange={(e)=>handleChangeTwo(e)}
+                          onChange={(e) => handleChangeTwo(e)}
+                          value={formData.mobile}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
                         <input
-                          type="text"
+                          type="email"
                           class="form-control"
                           placeholder="Email"
+                          // onChange={(e) => handleChange(e)}
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="email"
+                          value={formData.email}
+
                         />
                       </div>
 
