@@ -13,9 +13,13 @@ const AddLandLord = () => {
       religion:"",
       education:"",
       mobile:"",
-      email:""
+      email:"",
+      nid:"",
+      passport:"",
     },
   ]);
+
+ 
 
   const handleChangeTwo = (e) => {
     console.log(e.target.name);
@@ -24,9 +28,34 @@ const AddLandLord = () => {
      
   };
 
+
+  ///Emergency details
+  const [emergencyData, setEmergencyData] = useState([
+
+    {
+
+      name:"",
+    },
+  ]);
+
+  const handleChangeEmergency = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    setFormData({...formData,[e.target.name]:[e.target.value]})
+     
+  };
+
+
+
+
+
+//city coporation
   const [yesVisible, setVisbleYes] = useState(false);
   const [noVisible, setVisbleNo] = useState(false);
+
   // const [yesvisible, setVisbleYes] = useState(false);
+
+
 
   // Family / Roomate Details State
   const [formValues, setFormValues] = useState([
@@ -481,6 +510,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="NID"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="nid"
+                          value={formData.nid}
                         />
                       </div>
                       <div class="col-md-12 mb-3">
@@ -488,8 +520,11 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Passport(if you have)"
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="passport"
+                          value={formData.passport}
                         />
-                      </div>
+                      </div>  
 
                       {/* ////Emergency Contact  */}
 
@@ -499,7 +534,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Name"
-                          name="Ename"
+                          onChange={(e) =>handleChangeEmergency(e)}
+                          name="name"
+                          value={emergencyData.name}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -507,7 +544,7 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Realation"
-                          name="Erealation"
+                          name="relationship"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -515,7 +552,7 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="NID"
-                          name="Enid"
+                          name="nid"
                         />
                       </div>
 
@@ -524,7 +561,7 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Address"
-                          name="Eaddress"
+                          name="address"
                         />
                       </div>
 
@@ -533,7 +570,7 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Age"
-                          name="Eage"
+                          name="age"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -541,7 +578,7 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Mobile No"
-                          name="Emobile"
+                          name="mobile"
                         />
                       </div>
 
