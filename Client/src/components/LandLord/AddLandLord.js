@@ -35,13 +35,18 @@ const AddLandLord = () => {
     {
 
       name:"",
+      relationship:"",
+      nid:"",
+      address:"",
+      age:"",
+      mobile:""
     },
   ]);
 
   const handleChangeEmergency = (e) => {
     console.log(e.target.name);
     console.log(e.target.value);
-    setFormData({...formData,[e.target.name]:[e.target.value]})
+    setEmergencyData({...emergencyData,[e.target.name]:[e.target.value]})
      
   };
 
@@ -84,6 +89,8 @@ const AddLandLord = () => {
 
   //// family
   let handleChange = (i, e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
     let newFormValues = [...formValues];
     newFormValues[i][e.target.name] = e.target.value;
     setFormValues(newFormValues);
@@ -544,7 +551,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Realation"
+                          onChange={(e) =>handleChangeEmergency(e)}
                           name="relationship"
+                          value={emergencyData.relationship}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -552,7 +561,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="NID"
+                          onChange={(e) =>handleChangeEmergency(e)}
                           name="nid"
+                          value={emergencyData.nid}
                         />
                       </div>
 
@@ -561,7 +572,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Address"
+                          onChange={(e) =>handleChangeEmergency(e)}
                           name="address"
+                          value={emergencyData.address}
                         />
                       </div>
 
@@ -570,7 +583,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Age"
+                          onChange={(e) =>handleChangeEmergency(e)}
                           name="age"
+                          value={emergencyData.age}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -578,7 +593,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Mobile No"
+                          onChange={(e) =>handleChangeEmergency(e)}
                           name="mobile"
+                          value={emergencyData.mobile}
                         />
                       </div>
 
