@@ -16,6 +16,9 @@ const AddLandLord = () => {
       email:"",
       nid:"",
       passport:"",
+      land_lord_form_submit_date:"",
+      land_lord_signature:""
+
     },
   ]);
 
@@ -64,23 +67,23 @@ const AddLandLord = () => {
 
   // Family / Roomate Details State
   const [formValues, setFormValues] = useState([
-    { fname: "", occupation: "", age: "", mobile: "", gender: "" },
+    { member_name: "", occupation: "", age: "", mobile: "", gender: "" },
   ]);
 
   // Home Servent Details State
   const [serventValues, setserventValues] = useState([
-    { s_name: "", s_nid: "", s_mobile: "", s_area: "" },
+    { servant_name: "", nid: "", mobile: "", area: "" },
   ]);
 
   /////Driver state
   const [driverValues, setdriverValues] = useState([
-    { d_name: "", d_nid: "", d_mobile: "", d_area: "" },
+    { driver_name: "", nid: "", mobile: "", area: "" },
   ]);
 
   ///Caretakerstate
 
   const [caretakerValues, setcaretakerValus] = useState([
-    { c_name: "", c_nid: "", c_mobile: "", c_area: "" },
+    { caretaker_name: "", nid: "", mobile: "", area: "" },
   ]);
   ///Flate state
   const [flateValues, setflateValues] = useState([
@@ -99,7 +102,7 @@ const AddLandLord = () => {
   let addFormFields = () => {
     setFormValues([
       ...formValues,
-      { fname: "", occupation: "", age: "", mobile: "" },
+      { member_name: "", occupation: "", age: "", mobile: "" , gender:""},
     ]);
   };
 
@@ -111,6 +114,8 @@ const AddLandLord = () => {
 
   /// servent
   let servantChange = (i, e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
     let newServentValues = [...serventValues];
     newServentValues[i][e.target.name] = e.target.value;
     setserventValues(newServentValues);
@@ -119,7 +124,7 @@ const AddLandLord = () => {
   let addServentFields = () => {
     setserventValues([
       ...serventValues,
-      { s_name: "", s_nid: "", s_mobile: "", s_area: "" },
+      { servant_name: "", nid: "", mobile: "", area: "" },
     ]);
   };
 
@@ -132,6 +137,8 @@ const AddLandLord = () => {
   // Driver Add
 
   let driverChange = (i, e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
     let newDriverValues = [...driverValues];
     newDriverValues[i][e.target.name] = e.target.value;
     setdriverValues(newDriverValues);
@@ -140,7 +147,7 @@ const AddLandLord = () => {
   let addDriverFields = () => {
     setdriverValues([
       ...driverValues,
-      { d_name: "", d_nid: "", d_mobile: "", d_area: "" },
+      { driver_name: "", nid: "", mobile: "", area: "" },
     ]);
   };
   let removeDriverFields = (i) => {
@@ -152,6 +159,8 @@ const AddLandLord = () => {
   ////Caretaker add
 
   let caretakerChange = (i, e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
     let newCaretakerValues = [...caretakerValues];
     newCaretakerValues[i][e.target.name] = e.target.value;
     setdriverValues(newCaretakerValues);
@@ -160,7 +169,7 @@ const AddLandLord = () => {
   let addCaretakerFields = () => {
     setcaretakerValus([
       ...caretakerValues,
-      { c_name: "", c_nid: "", c_mobile: "", c_area: "" },
+      { caretaker_name: "", nid: "", mobile: "", area: "" },
     ]);
   };
 
@@ -173,6 +182,8 @@ const AddLandLord = () => {
   ////flate add
 
   let flateChange = (i, e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
     let newFlateValues = [...flateValues];
     newFlateValues[i][e.target.name] = e.target.value;
     setflateValues(newFlateValues);
@@ -181,7 +192,7 @@ const AddLandLord = () => {
   let addFlateFields = () => {
     setflateValues([
       ...flateValues,
-      { flate_name: "", flate_renter_name: "", refferel_code: "" },
+      { flat_name: "", flat_renter_name: "", referral_code: "" },
     ]);
   };
   let removeFlateFields = (i) => {
@@ -615,8 +626,8 @@ const AddLandLord = () => {
                                   type="text"
                                   class="form-control"
                                   placeholder="Family Member Name"
-                                  name="fname"
-                                  value={element.fname || ""}
+                                  name="member_name"
+                                  value={element.member_name || ""}
                                   onChange={(e) => handleChange(index, e)}
                                 />
                               </div>
@@ -706,8 +717,8 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Home Servent Name"
-                                name="s_name"
-                                value={element.s_name || ""}
+                                name="servant_name"
+                                value={element.servant_name || ""}
                                 onChange={(e) => servantChange(index, e)}
                               />
                             </div>
@@ -716,8 +727,8 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="NID"
-                                name="s_nid"
-                                value={element.s_nid || ""}
+                                name="nid"
+                                value={element.nid || ""}
                                 onChange={(e) => servantChange(index, e)}
                               />
                             </div>
@@ -726,8 +737,8 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Mobile No"
-                                name="s_mobile"
-                                value={element.s_mobile || ""}
+                                name="mobile"
+                                value={element.mobile || ""}
                                 onChange={(e) => servantChange(index, e)}
                               />
                             </div>
@@ -736,8 +747,8 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Area"
-                                name="s_area"
-                                value={element.s_area || ""}
+                                name="area"
+                                value={element.area || ""}
                                 onChange={(e) => servantChange(index, e)}
                               />
                             </div>
@@ -780,9 +791,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Driver Name"
-                                name="d_name "
+                                name="driver_name"
                                 onChange={(e) => driverChange(index, e)}
-                                value={element.d_name || ""}
+                                value={element.driver_name || ""}
                               />
                             </div>
                             <div class="col-md-3 mb-3">
@@ -790,9 +801,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="NID"
-                                name="d_nid"
+                                name="nid"
                                 onChange={(e) => driverChange(index, e)}
-                                value={element.d_nid || ""}
+                                value={element.nid || ""}
                               />
                             </div>
                             <div class="col-md-3 mb-3">
@@ -800,9 +811,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Mobile No"
-                                name="d_mobile"
+                                name="mobile"
                                 onChange={(e) => driverChange(index, e)}
-                                value={element.d_mobile || ""}
+                                value={element.mobile || ""}
                               />
                             </div>
                             <div class="col-md-3 mb-3">
@@ -810,10 +821,10 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Area"
-                                name="d_area"
+                                name="area"
                                 //  onClick={() => addServentFields()}
                                 onChange={(e) => driverChange(index, e)}
-                                value={element.d_area || ""}
+                                value={element.area || ""}
                                 // onChange={(e) => servantChange(index, e)}
                               />
                             </div>
@@ -857,9 +868,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Caretaker Name"
-                                name="c_name"
+                                name="caretaker_name"
                                 onChange={(e) => caretakerChange(index, e)}
-                                value={element.c_name || ""}
+                                value={element.caretaker_name || ""}
                               />
                             </div>
                             <div class="col-md-3 mb-3">
@@ -867,9 +878,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="NID"
-                                name="c_nid "
+                                name="nid "
                                 onChange={(e) => caretakerChange(index, e)}
-                                value={element.c_nid || ""}
+                                value={element.nid || ""}
                               />
                             </div>
                             <div class="col-md-3 mb-3">
@@ -877,9 +888,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Mobile No"
-                                name="c_mobile"
+                                name="mobile"
                                 onChange={(e) => caretakerChange(index, e)}
-                                value={element.c_mobile || ""}
+                                value={element.mobile || ""}
                               />
                             </div>
                             <div class="col-md-3 mb-3">
@@ -887,9 +898,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Area"
-                                name="c_area"
+                                name="area"
                                 onChange={(e) => caretakerChange(index, e)}
-                                value={element.c_area || ""}
+                                value={element.area || ""}
                               />
                             </div>
 
@@ -934,9 +945,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="FlateName"
-                                name="flate_name"
+                                name="flat_name"
                                 onChange={(e) => flateChange(index, e)}
-                                value={element.flate_name || ""}
+                                value={element.flat_name || ""}
                               />
                             </div>
                             <div class="col-md-4 mb-3">
@@ -944,9 +955,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Flate Renter Name"
-                                name="flate_renter_name "
+                                name="flat_renter_name"
                                 onChange={(e) => flateChange(index, e)}
-                                value={element.flate_renter_name || ""}
+                                value={element.flat_renter_name || ""}
                               />
                             </div>
                             <div class="col-md-4 mb-3">
@@ -954,9 +965,9 @@ const AddLandLord = () => {
                                 type="text"
                                 class="form-control"
                                 placeholder="Refferel Code"
-                                name="refferel_code"
+                                name="referral_code"
                                 onChange={(e) => flateChange(index, e)}
-                                value={element.refferel_code || ""}
+                                value={element.referral_code || ""}
                               />
                             </div>
 
@@ -989,8 +1000,12 @@ const AddLandLord = () => {
                         <input
                           type="text"
                           class="form-control"
-                          placeholder=" Date"
-                          name=" "
+                          placeholder=" Date(D-M-Y)"
+                          onChange={(e) => handleChangeTwo(e)}
+                           
+ 
+                          name="land_lord_form_submit_date"
+                          value={formData.land_lord_form_submit_date}
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -998,7 +1013,9 @@ const AddLandLord = () => {
                           type="text"
                           class="form-control"
                           placeholder="Signature of Rent Person"
-                          name=" "
+                          onChange={(e) => handleChangeTwo(e)}
+                          name="land_lord_signature"
+                          value={formData.land_lord_signature}
                         />
                       </div>
 
