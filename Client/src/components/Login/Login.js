@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { mainContext } from "../../App";
 
 const Login = () => {
@@ -8,7 +9,7 @@ const Login = () => {
 
   const [user, setUser] = useState();
   const [password, setPassword] = useState();
-
+const navigate= useNavigate();
   const submitForm = (e) =>{
     e.preventDefault();
     // console.log("user",e.target.username.value);
@@ -26,6 +27,13 @@ const Login = () => {
 
   },[user,password])
 
+
+  if(user){
+    navigate("/dashboard")
+
+    
+
+  }
   return (
     <div>
       <main id="main" class="main">
