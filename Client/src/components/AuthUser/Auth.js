@@ -8,6 +8,10 @@ import ManageLandlord from "../LandLord/ManageLandlord";
 import ManageFamily from "../RentPerson/ManageFamily";
 import AddFamily from "../RentPerson/AddFamily";
 import Footer from "../Footer/Footer";
+import ManageSublet from '../RentPerson/ManageSublet';
+import AddSublet from '../RentPerson/AddSublet';
+import ManageMes from '../RentPerson/ManageMes';
+import AddMes from '../RentPerson/AddMes';
 
 
 
@@ -25,6 +29,10 @@ const Auth = () => {
                     <Route path="manage-landlord" element={<ManageLandlord />}></Route>
                     <Route path="family" element={<ManageFamily/>}></Route>
                     <Route path="add-family" element={<AddFamily/>}></Route>
+                    <Route path="sublet" element={<ManageSublet/>}></Route>
+                    <Route path="add-sublet" element={<AddSublet/>}></Route>
+                    <Route path="mes" element={<ManageMes/>}></Route>
+                    <Route path="add-mes" element={<AddMes/>}></Route>
 
                </Routes>
                <Footer></Footer>

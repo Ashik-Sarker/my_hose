@@ -1,18 +1,48 @@
  
 
  
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DMP from "../../assets/DMP.png";
 const AddFamily = () => {
-  const [visible, setVisble] = useState(false);
+  const [countries, setDivision] = useState([]);
+  const [divisionid, setDivisionId] = useState("");
+  const [districts, setDistrict] = useState([]);
+  const [thanas, setThana] = useState([]);
+
+  //city corporation
+  const [yesVisible, setVisbleYes] = useState(false);
+  const [noVisible, setVisbleNo] = useState(false);
+  // const [yesvisible, setVisbleYes] = useState(false);
+  ////old referelll
+  const [oldreferel, setOldReferelYes] = useState(false);
+  // const [oldreferelremove, setOldReferelRemove] = useState(true);
+  // const [newreferel, setNewReferelYes] = useState(false);
+  // Family / Roomate Details State
   const [formValues, setFormValues] = useState([
-    { fname: "", occupation: "", age: "", mobile: "" },
+    { fname: "", occupation: "", age: "", mobile: "", gender: "" },
   ]);
 
-  // const showReantDetails = () => {
-  //    console.log("heloo")
+  // Home Servent Details State
+  const [serventValues, setserventValues] = useState([
+    { s_name: "", s_nid: "", s_mobile: "", s_area: "" },
+  ]);
 
-  // };
+  /////Driver state
+  const [driverValues, setdriverValues] = useState([
+    { d_name: "", d_nid: "", d_mobile: "", d_area: "" },
+  ]);
+
+  ///Caretakerstate
+
+  const [caretakerValues, setcaretakerValus] = useState([
+    { c_name: "", c_nid: "", c_mobile: "", c_area: "" },
+  ]);
+  ///Flate state
+  // const [flateValues, setflateValues] = useState([
+  //   { flate_name: "", flate_renter_name: "", refferel_code: "" },
+  // ]);
+
+  //// family
   let handleChange = (i, e) => {
     let newFormValues = [...formValues];
     newFormValues[i][e.target.name] = e.target.value;
@@ -20,7 +50,10 @@ const AddFamily = () => {
   };
 
   let addFormFields = () => {
-    setFormValues([...formValues, { name: "", email: "" }]);
+    setFormValues([
+      ...formValues,
+      { fname: "", occupation: "", age: "", mobile: "" },
+    ]);
   };
 
   let removeFormFields = (i) => {
@@ -28,6 +61,108 @@ const AddFamily = () => {
     newFormValues.splice(i, 1);
     setFormValues(newFormValues);
   };
+
+  /// servent
+  let servantChange = (i, e) => {
+    let newServentValues = [...serventValues];
+    newServentValues[i][e.target.name] = e.target.value;
+    setserventValues(newServentValues);
+  };
+
+  let addServentFields = () => {
+    setserventValues([
+      ...serventValues,
+      { s_name: "", s_nid: "", s_mobile: "", s_area: "" },
+    ]);
+  };
+
+  let removeServentFields = (i) => {
+    let newServentValues = [...serventValues];
+    newServentValues.splice(i, 1);
+    setserventValues(newServentValues);
+  };
+
+  // Driver Add
+
+  let driverChange = (i, e) => {
+    let newDriverValues = [...driverValues];
+    newDriverValues[i][e.target.name] = e.target.value;
+    setdriverValues(newDriverValues);
+  };
+
+  let addDriverFields = () => {
+    setdriverValues([
+      ...driverValues,
+      { d_name: "", d_nid: "", d_mobile: "", d_area: "" },
+    ]);
+  };
+  let removeDriverFields = (i) => {
+    let newDriverValues = [...driverValues];
+    newDriverValues.splice(i, 1);
+    setdriverValues(newDriverValues);
+  };
+
+  ////Caretaker add
+
+  let caretakerChange = (i, e) => {
+    let newCaretakerValues = [...caretakerValues];
+    newCaretakerValues[i][e.target.name] = e.target.value;
+    setdriverValues(newCaretakerValues);
+  };
+
+  let addCaretakerFields = () => {
+    setcaretakerValus([
+      ...caretakerValues,
+      { c_name: "", c_nid: "", c_mobile: "", c_area: "" },
+    ]);
+  };
+
+  let removeCaretakerFields = (i) => {
+    let newCaretakerValues = [...caretakerValues];
+    newCaretakerValues.splice(i, 1);
+    setcaretakerValus(newCaretakerValues);
+  };
+
+  // useEffect(() => {
+  //   fetch(`country.json`)
+  //     .then((res) => res.json())
+  //     .then((data) => setCountry(data));
+  // }, []);
+  useEffect(() => {
+    const getdivision = async () => {
+      const resdivision = await fetch(`divisions.json`);
+      const resdiv = await resdivision.json();
+      console.log(resdiv);
+      setDivision(await resdiv.divisions);
+    };
+    getdivision();
+  }, []);
+
+  const handleDivision = (event) => {
+    const DivisionId = event.target.value;
+    console.log(DivisionId);
+    setDivisionId(DivisionId);
+  };
+
+  useEffect(() => {
+    const getdistrict = async () => {
+      const resdistrict = await fetch(`districts.json`);
+      const resdis = await resdistrict.json();
+      console.log(resdis);
+      setDistrict(await resdis.districts);
+    };
+    getdistrict();
+  }, [divisionid]);
+
+  useEffect(() => {
+    const getthana = async () => {
+      const resthana = await fetch(`thana.json`);
+      const restha = await resthana.json();
+      console.log(restha);
+      setThana(await restha.upazilas);
+    };
+    getthana();
+  }, []);
 
   return (
     <div>
@@ -37,124 +172,251 @@ const AddFamily = () => {
             <div class="row">
               <div class="col-lg-12  px-5">
                 <div class="row">
-                  <div class="col-xxl-4 col-md-4 ">
+                  <div class="col-xxl-4 col-md-4 d-flex justify-content-center align-items-center">
                     <div
-                      class="card info-card revenue-card border border-dark  rounded-5"
+                      class="card info-card revenue-card d-flex  align-items-center justify-content-center   border border-dark  rounded-5"
                       style={{ height: "280px" }}
                     >
-                      <div class="card-body d-flex align-items-center justify-content-center ">
-                        <h5 class="card-title">Upload Passport Size Image</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-xxl-4 col-md-4">
-                    <div
-                      class="  info-card revenue-card"
-                      style={{ height: "200px" }}
-                    >
-                      <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                            {/* <i class="bi bi-currency-dollar"></i> */}
-                            <img src={DMP} alt="" className="w-50" />
+                      <div class=" d-flex  align-items-center justify-content-center   ">
+                        <div className=" ">
+                          <p class=" text-center  ">
+                            Upload Your Passport Size Image  
+                          </p>
+                          <div>
+                            <img
+                              className="w-50 rounded mx-auto d-block img-fluid"
+                              src="http://cdn.onlinewebfonts.com/svg/img_212915.png"
+                              alt=""
+                            />
                           </div>
-                          <div class="ps-3">
-                            <span class="text-muted small pt-2 ps-1">
-                              Dhaka Metropolitan Police
-                            </span>
-                          </div>
-                        </div>
 
-                        <div class="row mb-3  justify-content-center mt-5">
-                          <div class="col-sm-10">
+                          <div className="  text-center ">
                             <input
-                              type="text"
-                              class="form-control"
-                              id="inputText"
-                              placeholder="Division"
-                            />
-                          </div>
-                        </div>
-                        <div class="row mb-3 justify-content-center">
-                          <div class="col-sm-10">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="inputText"
-                              placeholder="Thana"
+                              type="file"
+                              className="     mt-5  "
+                              name="f_photo "
+                              style={{ marginLeft: "25%" }}
                             />
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-xxl-4 col-md-4 justify-content-center align-items-center   ">
+
+                  {/* ////permanent address  */}
+                  <div class="col-xxl-8 col-md-8 justify-content-center align-items-center  ">
                     <div
-                      class="card info-card revenue-card border-dark  rounded-5 border   "
+                      class="card info-card revenue-card border-dark rounded-5 border     "
                       style={{ height: "280px" }}
                     >
                       <div class="card-body">
-                        <div class="row mb-3 justify-content-center align-items-center mt-3">
-                          <div class="col-sm-10">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="inputText"
-                              placeholder="Flat/Floor"
-                            />
+                        <h5 className="mt-2">Permanent Address</h5>
+                        <div className="d-flex justify-content-center align-items-center gap-2">
+                          <div class="col-md-4  ">
+                            <div class="col-sm-10">
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="f_divisions"
+                                id="divisions"
+                                for="divisions"
+                                onChange={(e) => handleDivision(e)}
+                              >
+                                <option disabled selected>
+                                  ----Select Division----
+                                </option>
+                                {countries.map((country) => (
+                                  <option
+                                    key={country.id}
+                                    value={country.id}
+                                    country={country}
+                                  >
+                                    {country.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
                           </div>
-                        </div>
-                        <div class="row mb-3 d-flex justify-content-center align-items-center">
-                          <div class="col-sm-10">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="inputText"
-                              placeholder="House Holding"
-                            />
+                          <div class="col-md-4  ">
+                            <div class="col-sm-10">
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="f_district"
+                                id="district"
+                                for="divisions"
+                              >
+                                <option disabled selected>
+                                  Select District
+                                </option>
+                                {districts.map((district) => (
+                                  <option
+                                    key={district.id}
+                                    value={district.id}
+                                    district={district}
+                                  >
+                                    {district.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4   ">
+                            <div class="col-sm-10">
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="f_thana"
+                                id="thana"
+                                for="divisions"
+                              >
+                                <option disabled selected>
+                                  Select Thana
+                                </option>
+                                {thanas.map((thana) => (
+                                  <option
+                                    key={thana.id}
+                                    value={thana.id}
+                                    thana={thana}
+                                  >
+                                    {thana.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
                           </div>
                         </div>
 
-                        <div class="row mb-3 justify-content-center align-items-center">
-                          <div class="col-sm-10">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="inputText"
-                              placeholder="Road"
-                            />
+                        <div className="  ">
+                          <div className="d-flex justify-content-center align-items-center">
+                            <div className="col-lg-4">
+                              <p className=" mt-2">City Corporration</p>
+                            </div>
+                            <div className="col-lg-4">
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  // name="y_city"
+                                  name="inlineRadioOptions"
+                                  id=" "
+                                  value="option1"
+                                  onClick={() => {
+                                    setVisbleYes(true);
+                                    setVisbleNo(false);
+                                  }}
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="inlineRadio1"
+                                >
+                                  yes
+                                </label>
+                              </div>
+                            </div>
+                            <div className="col-lg-4">
+                              <div class="form-check form-check-inline">
+                                <input
+                                  class="form-check-input"
+                                  type="radio"
+                                  // name="n_city"
+                                  name="inlineRadioOptions"
+                                  id=" "
+                                  value="option2"
+                                  onClick={() => {
+                                    setVisbleNo(true);
+                                    setVisbleYes(false);
+                                  }}
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="inlineRadio1"
+                                >
+                                  no
+                                </label>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="row mb-3 justify-content-center align-items-center">
-                          <div class="col-sm-10">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="inputText"
-                              placeholder="Area"
-                            />
-                          </div>
-                        </div>
-                        <div class="row mb-3 justify-content-center align-items-center">
-                          <div class="col-sm-10">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="inputText"
-                              placeholder="Postal Code"
-                            />
-                          </div>
+                          {yesVisible ? (
+                            <div className="row justify-items-center align-items-center">
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Ward No"
+                                  name="f_ward "
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="House No"
+                                  name="f_house "
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Road No"
+                                  name="f_road "
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Flat"
+                                  name="f_flat"
+                                />
+                              </div>
+                            </div>
+                          ) : null}
+                          {noVisible ? (
+                            <div className="row ">
+                              <div className="d-flex gap-2 justify-items-center align-items-center">
+                                <div class="col-md-4 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Union"
+                                    name="f_union"
+                                  />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Villiage"
+                                    name="f_villiage"
+                                  />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Ward No"
+                                    name="fu_ward"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          ) : null}
                         </div>
                       </div>
                     </div>
                   </div>
+
                   <div class="col-lg-12">
                     <div class="row mb-3   align-items-center justify-content-center mt-2">
                       <div class="col-md-12 mb-3">
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Owner of Name"
+                          placeholder="Name"
+                          name="f_name"
                         />
                       </div>
                       <div class="col-md-12 mb-3">
@@ -162,6 +424,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Fathers Name"
+                          name="f_father_name"
                         />
                       </div>
                       <div class="col-md-12 mb-3">
@@ -169,6 +432,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Mothers Name"
+                          name="f_mother_name"
                         />
                       </div>
 
@@ -177,6 +441,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Date of Birth"
+                          name="f_dob"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -184,16 +449,10 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Martial Satus"
+                          name="f_m_status"
                         />
                       </div>
 
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Present Address"
-                        />
-                      </div>
                       <div class="col-md-12 mb-3">
                         <input
                           type="text"
@@ -206,6 +465,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Religion"
+                          name="f_religion"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -213,6 +473,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Educational Status"
+                          name="f_e_status"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -220,6 +481,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Mobile No"
+                          name="f_mobile"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -227,6 +489,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Email"
+                          name="f_email"
                         />
                       </div>
 
@@ -235,6 +498,7 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="NID"
+                          name="f_nid"
                         />
                       </div>
                       <div class="col-md-12 mb-3">
@@ -242,8 +506,12 @@ const AddFamily = () => {
                           type="text"
                           class="form-control"
                           placeholder="Passport(if you have)"
+                          name="f_pasport"
                         />
                       </div>
+
+                      {/* ////Emergency Contact  */}
+
                       <h5 className="text-start">Emergency Contact</h5>
                       <div class="col-md-6 mb-3">
                         <input
@@ -261,6 +529,14 @@ const AddFamily = () => {
                           name="Erealation"
                         />
                       </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="NID"
+                          name="Enid"
+                        />
+                      </div>
 
                       <div class="col-md-6 mb-3">
                         <input
@@ -268,6 +544,15 @@ const AddFamily = () => {
                           class="form-control"
                           placeholder="Address"
                           name="Eaddress"
+                        />
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Age"
+                          name="Eage"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
@@ -278,67 +563,82 @@ const AddFamily = () => {
                           name="Emobile"
                         />
                       </div>
+
+                      {/* Family / Roomate Details */}
+
                       <h5 className="text-start">Family / Roomate Details</h5>
 
                       <form className="">
                         {formValues.map((element, index) => (
                           <div
-                            className="d-flex gap-1 justify-content-center px-1"
+                            className=" d-flex gap-4 justify-content-center px-1"
                             key={index}
                           >
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Family Member Name"
-                                name="fname"
-                                value={element.fname || ""}
-                                onChange={(e) => handleChange(index, e)}
-                              />
+                            <div className="d-flex gap-3">
+                              <div class="col-md-6 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Family Member Name"
+                                  name="fname"
+                                  value={element.fname || ""}
+                                  onChange={(e) => handleChange(index, e)}
+                                />
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Occupation"
+                                  name="occupation"
+                                  value={element.occupation || ""}
+                                  onChange={(e) => handleChange(index, e)}
+                                />
+                              </div>
                             </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Occupation"
-                                name="occupation"
-                                value={element.occupation || ""}
-                                onChange={(e) => handleChange(index, e)}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Age"
-                                name="age"
-                                value={element.age || ""}
-                                onChange={(e) => handleChange(index, e)}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Mobile No"
-                                name="mobile"
-                                value={element.mobile || ""}
-                                onChange={(e) => handleChange(index, e)}
-                              />
-                            </div>
-                            {index ? (
-                              <div
-                                className=""
 
-                                //     className=" btn btn-secondary  d-lg-block btn-sm"
-                                //     onClick={() => removeFormFields(index)}
-                              >
+                            <div className="d-flex gap-2">
+                              <div class="col-md-4 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Age"
+                                  name="age"
+                                  value={element.age || ""}
+                                  onChange={(e) => handleChange(index, e)}
+                                />
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Mobile No"
+                                  name="mobile"
+                                  value={element.mobile || ""}
+                                  onChange={(e) => handleChange(index, e)}
+                                />
+                              </div>
+
+                              <div class="col-md-4 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Gender"
+                                  name="gender"
+                                  value={element.gender || ""}
+                                  onChange={(e) => handleChange(index, e)}
+                                />
+                              </div>
+                            </div>
+
+                            {index ? (
+                              <div className="">
                                 <span
                                   type="button"
-                                  class="badge bg-secondary"
+                                  class="badge bg-danger px-1     "
                                   onClick={() => removeFormFields(index)}
                                 >
-                                  Remove
+                                  x
                                 </span>
                               </div>
                             ) : null}
@@ -356,161 +656,360 @@ const AddFamily = () => {
                         </div>
                       </form>
 
+                      {/* Home servent details  */}
 
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Home Servent Name"
-                          name=" "
-                        />
+                      <h5 className="text-start">Home Servent Details</h5>
+
+                      <form className="">
+                        {serventValues.map((element, index) => (
+                          <div
+                            className="d-flex gap-1 justify-content-center px-1"
+                            key={index}
+                          >
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Home Servent Name"
+                                name="s_name"
+                                value={element.s_name || ""}
+                                onChange={(e) => servantChange(index, e)}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="NID"
+                                name="s_nid"
+                                value={element.s_nid || ""}
+                                onChange={(e) => servantChange(index, e)}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Mobile No"
+                                name="s_mobile"
+                                value={element.s_mobile || ""}
+                                onChange={(e) => servantChange(index, e)}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Area"
+                                name="s_area"
+                                value={element.s_area || ""}
+                                onChange={(e) => servantChange(index, e)}
+                              />
+                            </div>
+                            {index ? (
+                              <div className="">
+                                <span
+                                  type="button"
+                                  class="badge bg-danger px-1"
+                                  onClick={() => removeServentFields(index)}
+                                >
+                                  x
+                                </span>
+                              </div>
+                            ) : null}
+                          </div>
+                        ))}
+
+                        <div className="  d-flex justify-content-end   ">
+                          <button
+                            type="button"
+                            class="btn btn-secondary btn-sm"
+                            onClick={() => addServentFields()}
+                          >
+                            Add Another One
+                          </button>
+                        </div>
+                      </form>
+
+                      {/* ////////Driver Details Form  */}
+
+                      <h5 className="text-start">Driver Details</h5>
+                      <form>
+                        {driverValues.map((element, index) => (
+                          <div
+                            className="d-flex gap-1 justify-content-center   "
+                            key={index}
+                          >
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Driver Name"
+                                name="d_name "
+                                onChange={(e) => driverChange(index, e)}
+                                value={element.d_name || ""}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="NID"
+                                name="d_nid"
+                                onChange={(e) => driverChange(index, e)}
+                                value={element.d_nid || ""}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Mobile No"
+                                name="d_mobile"
+                                onChange={(e) => driverChange(index, e)}
+                                value={element.d_mobile || ""}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Area"
+                                name="d_area"
+                                //  onClick={() => addServentFields()}
+                                onChange={(e) => driverChange(index, e)}
+                                value={element.d_area || ""}
+                                // onChange={(e) => servantChange(index, e)}
+                              />
+                            </div>
+
+                            {index ? (
+                              <div className="">
+                                <span
+                                  type="button"
+                                  class="badge bg-danger px-1"
+                                  onClick={() => removeDriverFields(index)}
+                                >
+                                  x
+                                </span>
+                              </div>
+                            ) : null}
+                          </div>
+                        ))}
+
+                        <div className="  d-flex justify-content-end   ">
+                          <button
+                            type="button"
+                            class="btn btn-secondary btn-sm"
+                            onClick={() => addDriverFields()}
+                          >
+                            Add Another One
+                          </button>
+                        </div>
+                      </form>
+
+                      {/* Caretaker Details */}
+
+                      <h5 className="text-start">Caretaker Details</h5>
+                      <form>
+                        {caretakerValues.map((element, index) => (
+                          <div
+                            className="d-flex justify-content-center align-items-center gap-1"
+                            key={index}
+                          >
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Caretaker Name"
+                                name="c_name"
+                                onChange={(e) => caretakerChange(index, e)}
+                                value={element.c_name || ""}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="NID"
+                                name="c_nid "
+                                onChange={(e) => caretakerChange(index, e)}
+                                value={element.c_nid || ""}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Mobile No"
+                                name="c_mobile"
+                                onChange={(e) => caretakerChange(index, e)}
+                                value={element.c_mobile || ""}
+                              />
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Area"
+                                name="c_area"
+                                onChange={(e) => caretakerChange(index, e)}
+                                value={element.c_area || ""}
+                              />
+                            </div>
+
+                            {index ? (
+                              <div className="">
+                                <span
+                                  type="button"
+                                  class="badge bg-danger px-1"
+                                  onClick={() => removeCaretakerFields(index)}
+                                >
+                                  x
+                                </span>
+                              </div>
+                            ) : null}
+                          </div>
+                        ))}
+
+                        <div className="  d-flex justify-content-end mb-3   ">
+                          <div className="   ">
+                            <button
+                              type="button"
+                              class="btn btn-secondary btn-sm"
+                              onClick={() => addCaretakerFields()}
+                            >
+                              Add Another One
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+
+                      {/* Additional Information */}
+
+                      <h5 className="text-start">Additional Information</h5>
+
+                      <div className="d-flex mt-1  gap-5 justify-content-center ">
+                        <h6>If you have previous landloard referrel code</h6>
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="r_yes"
+                            id=" "
+                            value=" "
+                            onClick={() => {
+                              setOldReferelYes(true);
+                              // setOldReferelYes(!true);
+                            }}
+                          />
+                          <label class="form-check-label" for="exampleRadios1">
+                            Yes
+                          </label>
+                        </div>
                       </div>
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="NID"
-                          name=" "
-                        />
+
+                      <div className="col-lg-12   d-flex justify-content-between   ">
+                        <div className="   ">
+                          <h5 className="text-start mt-2">
+                            New LandLord Information
+                          </h5>
+                          <div class="col-md-12 mb-3">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Name"
+                              name="new_l_name"
+                            />
+                          </div>
+                          <div class="col-md-12 mb-3">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="NID"
+                              name="new_l_nid"
+                            />
+                          </div>
+                          <div class="col-md-12 mb-3">
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="Referel Code"
+                              name="new_l_referel_code"
+                            />
+                          </div>
+                        </div>
+
+                        {oldreferel ? (
+                          <div className=" ">
+                            <h5 className="text-start mt-2">
+                              Old LandLord Information
+                            </h5>
+                            <div class="col-md-12 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Old  Name"
+                                name="old_l_name"
+                              />
+                            </div>
+                            <div class="col-md-12 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Old NID"
+                                name="old_l_nid"
+                              />
+                            </div>
+                            <div class="col-md-12 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Old Referel Code"
+                                name="old_l_referel_code"
+                              />
+                            </div>
+                            <button
+                              type="button"
+                              className="btn btn-secondary btn-sm mb-3"
+                              onClick={() => {
+                                setOldReferelYes(false);
+                                // setOldReferelYes(!true);
+                                // setOldReferelRemove(true)
+                              }}
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        ) : null}
                       </div>
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Mobile No"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Permanent Address"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Driver Name"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="NID"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Mobile No"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-3 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Permanent Address"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Previous Home Land Name"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Mobile No"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Address"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Reason of Leave Previous Home"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Present Home Land Name"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Mobile No"
-                          name=" "
-                        />
-                      </div>
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Present Home Start Living Date"
-                          name=" "
-                        />
-                      </div>
+
                       <div class="col-md-6 mb-3">
                         <input
                           type="text"
                           class="form-control"
                           placeholder=" Date"
-                          name=" "
+                          name="l_date"
                         />
                       </div>
                       <div class="col-md-6 mb-3">
                         <input
                           type="text"
                           class="form-control"
-                          placeholder="Signature of Rent Person"
-                          name=" "
+                          placeholder="Signature of Family Rent Person"
+                          name="f_signature"
                         />
                       </div>
 
                       <div className="  d-flex justify-content-end mb-3  ">
-                          <button
-                            type="button"
-                            class="btn btn-secondary btn-sm"
-                           
-                          >
-                            Save & Continue
-                          </button>
-                        </div>
-
+                        <button type="button" class="btn btn-secondary btn-sm">
+                          Save & Continue
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  
                 </div>
               </div>
-
-              
             </div>
           </section>
         </main>

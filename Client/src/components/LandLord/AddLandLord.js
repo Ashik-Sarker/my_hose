@@ -2,25 +2,61 @@ import React, { useState } from "react";
 
 const AddLandLord = () => {
 
-  const [formData, setFormData] = useState([
-    {
-      owner_name: "",
-      father_name:"",
-      mother_name:"",
-      date_of_birth:"",
-      marital_status:"",
-      occupation:"",
-      religion:"",
-      education:"",
-      mobile:"",
-      email:"",
-      nid:"",
-      passport:"",
-      land_lord_form_submit_date:"",
-      land_lord_signature:""
 
-    },
-  ]);
+
+
+
+  const submitForm = (e) =>{
+    e.preventDefault();
+    console.log("user",e.target.username.value);
+    console.log("user",e.target.username.name);
+    
+  }
+
+
+
+
+
+
+
+  
+  // const [formData, setFormData] = useState([
+  //   {
+  //     owner_name: "",
+  //     father_name:"",
+  //     mother_name:"",
+  //     date_of_birth:"",
+  //     marital_status:"",
+  //     occupation:"",
+  //     religion:"",
+  //     education:"",
+  //     mobile:"",
+  //     email:"",
+  //     nid:"",
+  //     passport:"",
+  //     land_lord_form_submit_date:"",
+  //     land_lord_signature:""
+
+  //   },
+  // ]);
+  const [formData, setFormData] = useState({
+
+    owner_name: "",
+    father_name: "",
+    mother_name: "",
+    date_of_birth: "",
+    marital_status: "",
+    occupation: "",
+    religion: "",
+    education: "",
+    mobile: "",
+    email: "",
+    nid: "",
+    passport: "",
+    land_lord_form_submit_date: "",
+    land_lord_signature: ""
+
+  });
 
  
 
@@ -208,7 +244,10 @@ const AddLandLord = () => {
           <section class="section dashboard">
             <div class="row">
               <div class="col-lg-12  px-5">
+
+              <form method="POST" onSubmit={submitForm} >
                 <div class="row">
+               
                   <div class="col-xxl-4 col-md-4 d-flex justify-content-center align-items-center">
                     <div
                       class="card info-card revenue-card d-flex  align-items-center justify-content-center   border border-dark  rounded-5"
@@ -231,7 +270,7 @@ const AddLandLord = () => {
                             <input
                               type="file"
                               className="     mt-5  "
-                              name=" "
+                              name="photo"
                               style={{ marginLeft: "25%" }}
                             />
                           </div>
@@ -1020,13 +1059,17 @@ const AddLandLord = () => {
                       </div>
 
                       <div className="  d-flex justify-content-end mb-3  ">
-                        <button type="button" class="btn btn-secondary btn-sm">
-                          Save & Continue
-                        </button>
+                        <input  type="submit" class="btn btn-secondary btn-sm  " value="Save & Continue"/>
+                  
+                         
                       </div>
                     </div>
                   </div>
                 </div>
+
+
+
+                </form>
               </div>
             </div>
           </section>
