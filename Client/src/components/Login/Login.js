@@ -36,7 +36,7 @@ const navigate= useNavigate();
   }
   return (
     <div>
-      <main id="main" class="main">
+      <main id=" " class=" ">
         <section class="section  ">
           <div class="container">
             <section class="section register min-vh-100 d-flex flex-column   ">

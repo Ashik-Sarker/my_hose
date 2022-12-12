@@ -1,4 +1,5 @@
  import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { mainContext } from '../../App';
 import Http from '../../common/Http';
  
@@ -21,11 +22,13 @@ const Navbar = () => {
      land_lord_form_submit_date: '',
      land_lord_signature: ''
    })
+   const navigate = useNavigate()
 
   const {setIsLogin} = useContext(mainContext);
 
   const LogOut = () =>{
     setIsLogin(false);
+    navigate("/")
 
    }
    

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const AddLandLord = () => {
 
-
+  const [countries, setDivision] = useState([]);
+  const [divisionid, setDivisionId] = useState("");
+  const [districts, setDistrict] = useState([]);
+  const [thanas, setThana] = useState([]);
 
 
 
@@ -237,6 +240,51 @@ const AddLandLord = () => {
     setflateValues(newFlateValues);
   };
 
+  useEffect(() => {
+    const getdivision = async () => {
+      const resdivision = await fetch(`divisions.json`);
+      const resdiv = await resdivision.json();
+      console.log(resdiv);
+      setDivision(await resdiv.divisions);
+    };
+    getdivision();
+  }, []);
+
+  const handleDivision = (event) => {
+    const DivisionId = event.target.value;
+    console.log(DivisionId);
+    setDivisionId(DivisionId);
+  };
+
+  useEffect(() => {
+    const getdistrict = async () => {
+      const resdistrict = await fetch(`districts.json`);
+      const resdis = await resdistrict.json();
+      console.log(resdis);
+      setDistrict(await resdis.districts);
+    };
+    getdistrict();
+  }, [divisionid]);
+
+  useEffect(() => {
+    const getthana = async () => {
+      const resthana = await fetch(`thana.json`);
+      const restha = await resthana.json();
+      console.log(restha);
+      setThana(await restha.upazilas);
+    };
+    getthana();
+  }, []);
+
+
+
+
+
+
+
+
+
+
   return (
     <div>
       <div>
@@ -293,11 +341,23 @@ const AddLandLord = () => {
                               <select
                                 class="form-select"
                                 aria-label="Default select example"
+                                name="m_divisions"
+                                id="divisions"
+                                for="divisions"
+                                onChange={(e) => handleDivision(e)}
                               >
-                                <option selected>Divison</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option disabled selected>
+                                  ----Select Division----
+                                </option>
+                                {countries.map((country) => (
+                                  <option
+                                    key={country.id}
+                                    value={country.id}
+                                    country={country}
+                                  >
+                                    {country.name}
+                                  </option>
+                                ))}
                               </select>
                             </div>
                           </div>
@@ -306,11 +366,22 @@ const AddLandLord = () => {
                               <select
                                 class="form-select"
                                 aria-label="Default select example"
+                                name="m_district"
+                                id="district"
+                                for="divisions"
                               >
-                                <option selected>District</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option disabled selected>
+                                  Select District
+                                </option>
+                                {districts.map((district) => (
+                                  <option
+                                    key={district.id}
+                                    value={district.id}
+                                    district={district}
+                                  >
+                                    {district.name}
+                                  </option>
+                                ))}
                               </select>
                             </div>
                           </div>
@@ -320,11 +391,22 @@ const AddLandLord = () => {
                               <select
                                 class="form-select"
                                 aria-label="Default select example"
+                                name="m_thana"
+                                id="thana"
+                                for="divisions"
                               >
-                                <option selected>Thana</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option disabled selected>
+                                  Select Thana
+                                </option>
+                                {thanas.map((thana) => (
+                                  <option
+                                    key={thana.id}
+                                    value={thana.id}
+                                    thana={thana}
+                                  >
+                                    {thana.name}
+                                  </option>
+                                ))}
                               </select>
                             </div>
                           </div>
@@ -340,8 +422,9 @@ const AddLandLord = () => {
                                 <input
                                   class="form-check-input"
                                   type="radio"
+                                  // name="y_city"
                                   name="inlineRadioOptions"
-                                  id="inlineRadio1"
+                                  id=" "
                                   value="option1"
                                   onClick={() => {
                                     setVisbleYes(true);
@@ -361,9 +444,10 @@ const AddLandLord = () => {
                                 <input
                                   class="form-check-input"
                                   type="radio"
+                                  // name="n_city"
                                   name="inlineRadioOptions"
-                                  id="inlineRadio1"
-                                  value="option1"
+                                  id=" "
+                                  value="option2"
                                   onClick={() => {
                                     setVisbleNo(true);
                                     setVisbleYes(false);
@@ -385,7 +469,7 @@ const AddLandLord = () => {
                                   type="text"
                                   class="form-control"
                                   placeholder="Ward No"
-                                  name=" "
+                                  name="m_ward "
                                 />
                               </div>
                               <div class="col-md-3 mb-3">
@@ -393,7 +477,7 @@ const AddLandLord = () => {
                                   type="text"
                                   class="form-control"
                                   placeholder="House No"
-                                  name=" "
+                                  name="f_house "
                                 />
                               </div>
                               <div class="col-md-3 mb-3">
@@ -401,7 +485,7 @@ const AddLandLord = () => {
                                   type="text"
                                   class="form-control"
                                   placeholder="Road No"
-                                  name=" "
+                                  name="m_road "
                                 />
                               </div>
                               <div class="col-md-3 mb-3">
@@ -409,7 +493,7 @@ const AddLandLord = () => {
                                   type="text"
                                   class="form-control"
                                   placeholder="Flat"
-                                  name=" "
+                                  name="m_flat"
                                 />
                               </div>
                             </div>
@@ -422,7 +506,7 @@ const AddLandLord = () => {
                                     type="text"
                                     class="form-control"
                                     placeholder="Union"
-                                    name=" "
+                                    name="m_union"
                                   />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -430,7 +514,7 @@ const AddLandLord = () => {
                                     type="text"
                                     class="form-control"
                                     placeholder="Villiage"
-                                    name=" "
+                                    name="m_villiage"
                                   />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -438,7 +522,7 @@ const AddLandLord = () => {
                                     type="text"
                                     class="form-control"
                                     placeholder="Ward No"
-                                    name=" "
+                                    name="mu_ward"
                                   />
                                 </div>
                               </div>
@@ -452,7 +536,7 @@ const AddLandLord = () => {
                   <div class="col-lg-12">
                     <div class="row mb-3   align-items-center justify-content-center mt-2">
                       <div class="col-md-12 mb-3">
-                        <p>test</p>
+                        {/* <p>test</p> */}
                         <input
                           type="text"
                           class="form-control"
