@@ -120,7 +120,7 @@ const Navbar = () => {
                 </a>
               </li> 
 
-              <li class="nav-item dropdown">
+              {/* <li class="nav-item dropdown">
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                   <i class="bi bi-bell"></i>
@@ -193,9 +193,9 @@ const Navbar = () => {
 
                 </ul> 
 
-              </li> 
+              </li>  */}
 
-              <li class="nav-item dropdown">
+              {/* <li class="nav-item dropdown">
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                   <i class="bi bi-chat-left-text"></i>
@@ -259,7 +259,7 @@ const Navbar = () => {
 
                 </ul>
 
-              </li>
+              </li> */}
 
               <li class="nav-item dropdown pe-3">
 

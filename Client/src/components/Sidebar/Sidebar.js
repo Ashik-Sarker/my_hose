@@ -101,11 +101,17 @@ const Sidebar = () => {
               class="nav-content collapse "
               data-bs-parent="#sidebar-nav"
             >
-              <li>
+              {/* <li>
                 <a href="tables-general.html">
                   <i class="bi bi-circle"></i>
                   <span>All Users</span>
                 </a>
+              </li> */}
+               <li>
+                <Link class="nav-link" to="/mes">
+                  <i class="bi bi-circle"></i>
+                  All Users
+                </Link>
               </li>
               <li>
                 <a href="tables-data.html">
@@ -116,7 +122,7 @@ const Sidebar = () => {
             </ul>
           </li>
 
-          <li class="nav-item">
+          {/* <li class="nav-item">
             <a
               class="nav-link collapsed"
               data-bs-target="#charts-nav"
@@ -188,7 +194,7 @@ const Sidebar = () => {
                 </a>
               </li>
             </ul>
-          </li>
+          </li> */}
 
           {/* <li class="nav-heading">Pages</li> */}
 
