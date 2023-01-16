@@ -1,28 +1,18 @@
 import React, { useEffect, useState } from "react";
 
 const AddLandLord = () => {
-
   const [countries, setDivision] = useState([]);
   const [divisionid, setDivisionId] = useState("");
   const [districts, setDistrict] = useState([]);
   const [thanas, setThana] = useState([]);
+  const [nationality, setNationality] = useState(false);
 
-
-
-  const submitForm = (e) =>{
+  const submitForm = (e) => {
     e.preventDefault();
-    console.log("user",e.target.username.value);
-    console.log("user",e.target.username.name);
-    
-  }
+    console.log("user", e.target.username.value);
+    console.log("user", e.target.username.name);
+  };
 
-
-
-
-
-
-
-  
   // const [formData, setFormData] = useState([
   //   {
   //     owner_name: "",
@@ -43,7 +33,6 @@ const AddLandLord = () => {
   //   },
   // ]);
   const [formData, setFormData] = useState({
-
     owner_name: "",
     father_name: "",
     mother_name: "",
@@ -57,52 +46,38 @@ const AddLandLord = () => {
     nid: "",
     passport: "",
     land_lord_form_submit_date: "",
-    land_lord_signature: ""
-
+    land_lord_signature: "",
   });
-
- 
 
   const handleChangeTwo = (e) => {
     console.log(e.target.name);
     console.log(e.target.value);
-    setFormData({...formData,[e.target.name]:[e.target.value]})
-     
+    setFormData({ ...formData, [e.target.name]: [e.target.value] });
   };
-
 
   ///Emergency details
   const [emergencyData, setEmergencyData] = useState([
-
     {
-
-      name:"",
-      relationship:"",
-      nid:"",
-      address:"",
-      age:"",
-      mobile:""
+      name: "",
+      relationship: "",
+      nid: "",
+      address: "",
+      age: "",
+      mobile: "",
     },
   ]);
 
   const handleChangeEmergency = (e) => {
     console.log(e.target.name);
     console.log(e.target.value);
-    setEmergencyData({...emergencyData,[e.target.name]:[e.target.value]})
-     
+    setEmergencyData({ ...emergencyData, [e.target.name]: [e.target.value] });
   };
 
-
-
-
-
-//city coporation
+  //city coporation
   const [yesVisible, setVisbleYes] = useState(false);
   const [noVisible, setVisbleNo] = useState(false);
 
   // const [yesvisible, setVisbleYes] = useState(false);
-
-
 
   // Family / Roomate Details State
   const [formValues, setFormValues] = useState([
@@ -141,7 +116,7 @@ const AddLandLord = () => {
   let addFormFields = () => {
     setFormValues([
       ...formValues,
-      { member_name: "", occupation: "", age: "", mobile: "" , gender:""},
+      { member_name: "", occupation: "", age: "", mobile: "", gender: "" },
     ]);
   };
 
@@ -276,15 +251,6 @@ const AddLandLord = () => {
     getthana();
   }, []);
 
-
-
-
-
-
-
-
-
-
   return (
     <div>
       <div>
@@ -292,371 +258,354 @@ const AddLandLord = () => {
           <section class="section dashboard">
             <div class="row">
               <div class="col-lg-12  px-5">
+                <form method="POST" onSubmit={submitForm}>
+                  <div class="row">
+                    <div class="col-xxl-4 col-md-4 d-flex justify-content-center align-items-center">
+                      <div
+                        class="card info-card revenue-card d-flex  align-items-center justify-content-center   border border-dark  rounded-5"
+                        style={{ height: "280px" }}
+                      >
+                        <div class=" d-flex  align-items-center justify-content-center   ">
+                          <div className=" ">
+                            <p class=" text-center  ">
+                              Upload Your Passport Size Image
+                            </p>
+                            <div>
+                              <img
+                                className="w-50 rounded mx-auto d-block img-fluid"
+                                src="http://cdn.onlinewebfonts.com/svg/img_212915.png"
+                                alt=""
+                              />
+                            </div>
 
-              <form method="POST" onSubmit={submitForm} >
-                <div class="row">
-               
-                  <div class="col-xxl-4 col-md-4 d-flex justify-content-center align-items-center">
-                    <div
-                      class="card info-card revenue-card d-flex  align-items-center justify-content-center   border border-dark  rounded-5"
-                      style={{ height: "280px" }}
-                    >
-                      <div class=" d-flex  align-items-center justify-content-center   ">
-                        <div className=" ">
-                          <p class=" text-center  ">
-                            Upload Your Passport Size Image
-                          </p>
-                          <div>
-                            <img
-                              className="w-50 rounded mx-auto d-block img-fluid"
-                              src="http://cdn.onlinewebfonts.com/svg/img_212915.png"
-                              alt=""
-                            />
-                          </div>
-
-                          <div className="  text-center ">
-                            <input
-                              type="file"
-                              className="     mt-5  "
-                              name="photo"
-                              style={{ marginLeft: "25%" }}
-                            />
+                            <div className="  text-center ">
+                              <input
+                                type="file"
+                                className="     mt-5  "
+                                name="photo"
+                                style={{ marginLeft: "25%" }}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* ////permanent address  */}
-                  <div class="col-xxl-8 col-md-8 justify-content-center align-items-center  ">
-                    <div
-                      class="card info-card revenue-card border-dark rounded-5 border     "
-                      style={{ height: "280px" }}
-                    >
-                      <div class="card-body">
-                        <h5 className="mt-2">Permanent Address</h5>
-                        <div className="d-flex justify-content-center align-items-center gap-2">
-                          <div class="col-md-4  ">
-                            <div class="col-sm-10">
-                              <select
-                                class="form-select"
-                                aria-label="Default select example"
-                                name="m_divisions"
-                                id="divisions"
-                                for="divisions"
-                                onChange={(e) => handleDivision(e)}
-                              >
-                                <option disabled selected>
-                                  ----Select Division----
-                                </option>
-                                {countries.map((country) => (
-                                  <option
-                                    key={country.id}
-                                    value={country.id}
-                                    country={country}
-                                  >
-                                    {country.name}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-md-4  ">
-                            <div class="col-sm-10">
-                              <select
-                                class="form-select"
-                                aria-label="Default select example"
-                                name="m_district"
-                                id="district"
-                                for="divisions"
-                              >
-                                <option disabled selected>
-                                  Select District
-                                </option>
-                                {districts.map((district) => (
-                                  <option
-                                    key={district.id}
-                                    value={district.id}
-                                    district={district}
-                                  >
-                                    {district.name}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-
-                          <div class="col-md-4   ">
-                            <div class="col-sm-10">
-                              <select
-                                class="form-select"
-                                aria-label="Default select example"
-                                name="m_thana"
-                                id="thana"
-                                for="divisions"
-                              >
-                                <option disabled selected>
-                                  Select Thana
-                                </option>
-                                {thanas.map((thana) => (
-                                  <option
-                                    key={thana.id}
-                                    value={thana.id}
-                                    thana={thana}
-                                  >
-                                    {thana.name}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="  ">
-                          <div className="d-flex justify-content-center align-items-center">
-                            <div className="col-lg-4">
-                              <p className=" mt-2">City Corporration</p>
-                            </div>
-                            <div className="col-lg-4">
-                              <div class="form-check form-check-inline">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  // name="y_city"
-                                  name="inlineRadioOptions"
-                                  id=" "
-                                  value="option1"
-                                  onClick={() => {
-                                    setVisbleYes(true);
-                                    setVisbleNo(false);
-                                  }}
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="inlineRadio1"
+                    {/* ////permanent address  */}
+                    <div class="col-xxl-8 col-md-8 justify-content-center align-items-center  ">
+                      <div
+                        class="card info-card revenue-card border-dark rounded-5 border     "
+                        style={{ height: "280px" }}
+                      >
+                        <div class="card-body">
+                          <h5 className="mt-2">Permanent Address</h5>
+                          <div className="d-flex justify-content-center align-items-center gap-2">
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_divisions"
+                                  id="divisions"
+                                  for="divisions"
+                                  onChange={(e) => handleDivision(e)}
                                 >
-                                  yes
-                                </label>
+                                  <option disabled selected>
+                                    ----Select Division----
+                                  </option>
+                                  {countries.map((country) => (
+                                    <option
+                                      key={country.id}
+                                      value={country.id}
+                                      country={country}
+                                    >
+                                      {country.name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </div>
-                            <div className="col-lg-4">
-                              <div class="form-check form-check-inline">
-                                <input
-                                  class="form-check-input"
-                                  type="radio"
-                                  // name="n_city"
-                                  name="inlineRadioOptions"
-                                  id=" "
-                                  value="option2"
-                                  onClick={() => {
-                                    setVisbleNo(true);
-                                    setVisbleYes(false);
-                                  }}
-                                />
-                                <label
-                                  class="form-check-label"
-                                  for="inlineRadio1"
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_district"
+                                  id="district"
+                                  for="divisions"
                                 >
-                                  no
-                                </label>
+                                  <option disabled selected>
+                                    Select District
+                                  </option>
+                                  {districts.map((district) => (
+                                    <option
+                                      key={district.id}
+                                      value={district.id}
+                                      district={district}
+                                    >
+                                      {district.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-4   ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_thana"
+                                  id="thana"
+                                  for="divisions"
+                                >
+                                  <option disabled selected>
+                                    Select Thana
+                                  </option>
+                                  {thanas.map((thana) => (
+                                    <option
+                                      key={thana.id}
+                                      value={thana.id}
+                                      thana={thana}
+                                    >
+                                      {thana.name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </div>
                           </div>
-                          {yesVisible ? (
-                            <div className="row justify-items-center align-items-center">
-                              <div class="col-md-3 mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="Ward No"
-                                  name="m_ward "
-                                />
+
+                          <div className="  ">
+                            <div className="d-flex justify-content-center align-items-center">
+                              <div className="col-lg-4">
+                                <p className=" mt-2">City Corporration</p>
                               </div>
-                              <div class="col-md-3 mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="House No"
-                                  name="f_house "
-                                />
+                              <div className="col-lg-4">
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    // name="y_city"
+                                    name="inlineRadioOptions"
+                                    id=" "
+                                    value="option1"
+                                    onClick={() => {
+                                      setVisbleYes(true);
+                                      setVisbleNo(false);
+                                    }}
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="inlineRadio1"
+                                  >
+                                    yes
+                                  </label>
+                                </div>
                               </div>
-                              <div class="col-md-3 mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="Road No"
-                                  name="m_road "
-                                />
-                              </div>
-                              <div class="col-md-3 mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="Flat"
-                                  name="m_flat"
-                                />
+                              <div className="col-lg-4">
+                                <div class="form-check form-check-inline">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    // name="n_city"
+                                    name="inlineRadioOptions"
+                                    id=" "
+                                    value="option2"
+                                    onClick={() => {
+                                      setVisbleNo(true);
+                                      setVisbleYes(false);
+                                    }}
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="inlineRadio1"
+                                  >
+                                    no
+                                  </label>
+                                </div>
                               </div>
                             </div>
-                          ) : null}
-                          {noVisible ? (
-                            <div className="row ">
-                              <div className="d-flex gap-2 justify-items-center align-items-center">
-                                <div class="col-md-4 mb-3">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Union"
-                                    name="m_union"
-                                  />
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Villiage"
-                                    name="m_villiage"
-                                  />
-                                </div>
-                                <div class="col-md-4 mb-3">
+                            {yesVisible ? (
+                              <div className="row justify-items-center align-items-center">
+                                <div class="col-md-3 mb-3">
                                   <input
                                     type="text"
                                     class="form-control"
                                     placeholder="Ward No"
-                                    name="mu_ward"
+                                    name="m_ward "
+                                  />
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="House No"
+                                    name="f_house "
+                                  />
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Road No"
+                                    name="m_road "
+                                  />
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Flat"
+                                    name="m_flat"
                                   />
                                 </div>
                               </div>
-                            </div>
-                          ) : null}
+                            ) : null}
+                            {noVisible ? (
+                              <div className="row ">
+                                <div className="d-flex gap-2 justify-items-center align-items-center">
+                                  <div class="col-md-4 mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Union"
+                                      name="m_union"
+                                    />
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Villiage"
+                                      name="m_villiage"
+                                    />
+                                  </div>
+                                  <div class="col-md-4 mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Ward No"
+                                      name="mu_ward"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            ) : null}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="col-lg-12">
-                    <div class="row mb-3   align-items-center justify-content-center mt-2">
-                      <div class="col-md-12 mb-3">
-                        {/* <p>test</p> */}
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Owner of Name"
-                          onChange={(e) => handleChangeTwo(e)}
-                          // onChange={console.log('test')}
-                          name="owner_name"
-                          value={formData.owner_name}
-                          
-                        />
-                      </div>
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Fathers Name"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="father_name"
-                          value={formData.father_name}
-                          
-                        />
-                      </div>
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Mothers Name"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="mother_name"
-                          value={formData.mother_name}
-                        />
-                      </div>
+                    <div class="col-lg-12">
+                      <div class="row mb-3   align-items-center justify-content-center mt-2">
+                        <div class="col-md-12 mb-3">
+                          {/* <p>test</p> */}
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Owner of Name"
+                            onChange={(e) => handleChangeTwo(e)}
+                            // onChange={console.log('test')}
+                            name="owner_name"
+                            value={formData.owner_name}
+                          />
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Fathers Name"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="father_name"
+                            value={formData.father_name}
+                          />
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Mothers Name"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="mother_name"
+                            value={formData.mother_name}
+                          />
+                        </div>
 
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Date of Birth(D-M-Y)"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="date_of_birth"
-                          value={formData.date}
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Date of Birth(D-M-Y)"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="date_of_birth"
+                            value={formData.date}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Martial Satus"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="marital_status"
+                            value={formData.marital_status}
+                          />
+                        </div>
 
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Martial Satus"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="marital_status"
-                          value={formData.marital_status}
-                        />
-                      </div>
-
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Occupation/Organization/Job Location"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="occupation"
-                          value={formData.occupation}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Religion"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="religion"
-                          value={formData.religion}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Educational Status"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="education"
-                          value={formData.education}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="number"
-                          class="form-control"
-                          placeholder="Mobile No"
-                          name="mobile"
-                          // onChange={(e)=>handleChangeTwo(e)}
-                          onChange={(e) => handleChangeTwo(e)}
-                          value={formData.mobile}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="email"
-                          class="form-control"
-                          placeholder="Email"
-                          // onChange={(e) => handleChange(e)}
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="email"
-                          value={formData.email}
-
-                        />
-                      </div>
-
-                      <div class="col-md-12 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="NID"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="nid"
-                          value={formData.nid}
-                        />
-                      </div>
-                      <div class="col-md-12 mb-3">
+                        <div class="col-md-12 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Occupation/Organization/Job Location"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="occupation"
+                            value={formData.occupation}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Religion"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="religion"
+                            value={formData.religion}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Educational Status"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="education"
+                            value={formData.education}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Mobile No"
+                            name="mobile"
+                            // onChange={(e)=>handleChangeTwo(e)}
+                            onChange={(e) => handleChangeTwo(e)}
+                            value={formData.mobile}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="email"
+                            class="form-control"
+                            placeholder="Email"
+                            // onChange={(e) => handleChange(e)}
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="email"
+                            value={formData.email}
+                          />
+                        </div>
+                        {/* <div class="col-md-12 mb-3">
                         <input
                           type="text"
                           class="form-control"
@@ -665,494 +614,644 @@ const AddLandLord = () => {
                           name="passport"
                           value={formData.passport}
                         />
-                      </div>  
+                      </div>  */}
+                        <div className="d-flex mt-2 mb-3  gap-5   ">
+                          <h6>Nationality</h6>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="r_yes"
+                              id=" "
+                              value=" "
+                              onClick={() => {
+                                // setOldReferelYes(true);
+                                // // setOldReferelYes(!true);
+                                setNationality(false);
+                              }}
+                              checked
+                            />
+                            <label
+                              class="form-check-label"
+                              for="exampleRadios1"
+                            >
+                              Bangladeshi
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <div className="d-flex gap-5">
+                            <div>
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="r_yes"
+                              id=" "
+                              value=" "
+                              onClick={() => {
+                                // setOldReferelYes(true);
+                                // // setOldReferelYes(!true);
+                                setNationality(true);
+                              }}
+                            />
+                            <label
+                              class="form-check-label"
+                              for="exampleRadios1"
+                            >
+                              Forengir
+                            </label>
+                            </div>
+                            
+                            {nationality ? (
+                            <div class="col-md-12 mb-3">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Passport "
+                                onChange={(e) => handleChangeTwo(e)}
+                                name="passport"
+                                value={formData.passport}
+                              />
+                            </div>
+                          ) : null}
+                          </div>
+                          </div>
+                         
+                          
+                        </div>
 
-                      {/* ////Emergency Contact  */}
+                        <div class="col-md-12 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="NID"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="nid"
+                            value={formData.nid}
+                          />
+                        </div>
 
-                      <h5 className="text-start">Emergency Contact</h5>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Name"
-                          onChange={(e) =>handleChangeEmergency(e)}
-                          name="name"
-                          value={emergencyData.name}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Realation"
-                          onChange={(e) =>handleChangeEmergency(e)}
-                          name="relationship"
-                          value={emergencyData.relationship}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="NID"
-                          onChange={(e) =>handleChangeEmergency(e)}
-                          name="nid"
-                          value={emergencyData.nid}
-                        />
-                      </div>
+                        {/* ////Emergency Contact  */}
 
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Address"
-                          onChange={(e) =>handleChangeEmergency(e)}
-                          name="address"
-                          value={emergencyData.address}
-                        />
-                      </div>
+                        <h5 className="text-start">Emergency Contact</h5>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Name"
+                            onChange={(e) => handleChangeEmergency(e)}
+                            name="name"
+                            value={emergencyData.name}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Realation"
+                            onChange={(e) => handleChangeEmergency(e)}
+                            name="relationship"
+                            value={emergencyData.relationship}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="NID"
+                            onChange={(e) => handleChangeEmergency(e)}
+                            name="nid"
+                            value={emergencyData.nid}
+                          />
+                        </div>
 
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Age"
-                          onChange={(e) =>handleChangeEmergency(e)}
-                          name="age"
-                          value={emergencyData.age}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Mobile No"
-                          onChange={(e) =>handleChangeEmergency(e)}
-                          name="mobile"
-                          value={emergencyData.mobile}
-                        />
-                      </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Address"
+                            onChange={(e) => handleChangeEmergency(e)}
+                            name="address"
+                            value={emergencyData.address}
+                          />
+                        </div>
 
-                      {/* Family / Roomate Details */}
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Age"
+                            onChange={(e) => handleChangeEmergency(e)}
+                            name="age"
+                            value={emergencyData.age}
+                          />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Mobile No"
+                            onChange={(e) => handleChangeEmergency(e)}
+                            name="mobile"
+                            value={emergencyData.mobile}
+                          />
+                        </div>
 
-                      <h5 className="text-start">Family / Roomate Details</h5>
+                        {/* Family / Roomate Details */}
 
-                      <form className="">
-                        {formValues.map((element, index) => (
-                          <div
-                            className=" d-flex gap-4 justify-content-center px-1"
-                            key={index}
-                          >
-                            <div className="d-flex gap-3">
-                              <div class="col-md-6 mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="Family Member Name"
-                                  name="member_name"
-                                  value={element.member_name || ""}
-                                  onChange={(e) => handleChange(index, e)}
-                                />
+                        <h5 className="text-start">Family / Roomate Details</h5>
+                        <div className="row">
+                        <div className="d-flex justify-content-center align-items-center gap-2 py-3  ">
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_divisions"
+                                  id="divisions"
+                                  for="divisions"
+                                  onChange={(e) => handleDivision(e)}
+                                >
+                                  <option disabled selected>
+                                    ----Select Division----
+                                  </option>
+                                  {countries.map((country) => (
+                                    <option
+                                      key={country.id}
+                                      value={country.id}
+                                      country={country}
+                                    >
+                                      {country.name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
-                              <div class="col-md-6 mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="Occupation"
-                                  name="occupation"
-                                  value={element.occupation || ""}
-                                  onChange={(e) => handleChange(index, e)}
-                                />
+                            </div>
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_district"
+                                  id="district"
+                                  for="divisions"
+                                >
+                                  <option disabled selected>
+                                    Select District
+                                  </option>
+                                  {districts.map((district) => (
+                                    <option
+                                      key={district.id}
+                                      value={district.id}
+                                      district={district}
+                                    >
+                                      {district.name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </div>
 
-                            <div className="d-flex gap-2">
-                              <div class="col-md-4 mb-3">
+                            <div class="col-md-4   ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_thana"
+                                  id="thana"
+                                  for="divisions"
+                                >
+                                  <option disabled selected>
+                                    Select Thana
+                                  </option>
+                                  {thanas.map((thana) => (
+                                    <option
+                                      key={thana.id}
+                                      value={thana.id}
+                                      thana={thana}
+                                    >
+                                      {thana.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <form className="">
+                          {formValues.map((element, index) => (
+                            <div
+                              className=" d-flex gap-4 justify-content-center px-1"
+                              key={index}
+                            >
+                              <div className="d-flex gap-3">
+                                <div class="col-md-6 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Family Member Name"
+                                    name="member_name"
+                                    value={element.member_name || ""}
+                                    onChange={(e) => handleChange(index, e)}
+                                  />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Occupation"
+                                    name="occupation"
+                                    value={element.occupation || ""}
+                                    onChange={(e) => handleChange(index, e)}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="d-flex gap-2">
+                                <div class="col-md-4 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Age"
+                                    name="age"
+                                    value={element.age || ""}
+                                    onChange={(e) => handleChange(index, e)}
+                                  />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Mobile No"
+                                    name="mobile"
+                                    value={element.mobile || ""}
+                                    onChange={(e) => handleChange(index, e)}
+                                  />
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Gender"
+                                    name="gender"
+                                    value={element.gender || ""}
+                                    onChange={(e) => handleChange(index, e)}
+                                  />
+                                </div>
+                              </div>
+
+                              {index ? (
+                                <div className="">
+                                  <span
+                                    type="button"
+                                    class="badge bg-danger px-1     "
+                                    onClick={() => removeFormFields(index)}
+                                  >
+                                    x
+                                  </span>
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+
+                          <div className="  d-flex justify-content-end mb-3  ">
+                            <button
+                              type="button"
+                              class="btn btn-secondary btn-sm"
+                              onClick={() => addFormFields()}
+                            >
+                              Add Another One
+                            </button>
+                          </div>
+                        </form>
+
+                        {/* Home servent details  */}
+
+                        <h5 className="text-start">Home Servent Details</h5>
+
+                        <form className="">
+                          {serventValues.map((element, index) => (
+                            <div
+                              className="d-flex gap-1 justify-content-center px-1"
+                              key={index}
+                            >
+                              <div class="col-md-3 mb-3">
                                 <input
                                   type="text"
                                   class="form-control"
-                                  placeholder="Age"
-                                  name="age"
-                                  value={element.age || ""}
-                                  onChange={(e) => handleChange(index, e)}
+                                  placeholder="Home Servent Name"
+                                  name="servant_name"
+                                  value={element.servant_name || ""}
+                                  onChange={(e) => servantChange(index, e)}
                                 />
                               </div>
-                              <div class="col-md-4 mb-3">
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="NID"
+                                  name="nid"
+                                  value={element.nid || ""}
+                                  onChange={(e) => servantChange(index, e)}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
                                 <input
                                   type="text"
                                   class="form-control"
                                   placeholder="Mobile No"
                                   name="mobile"
                                   value={element.mobile || ""}
-                                  onChange={(e) => handleChange(index, e)}
+                                  onChange={(e) => servantChange(index, e)}
                                 />
                               </div>
-
-                              <div class="col-md-4 mb-3">
+                              <div class="col-md-3 mb-3">
                                 <input
                                   type="text"
                                   class="form-control"
-                                  placeholder="Gender"
-                                  name="gender"
-                                  value={element.gender || ""}
-                                  onChange={(e) => handleChange(index, e)}
+                                  placeholder="Area"
+                                  name="area"
+                                  value={element.area || ""}
+                                  onChange={(e) => servantChange(index, e)}
                                 />
                               </div>
+                              {index ? (
+                                <div className="">
+                                  <span
+                                    type="button"
+                                    class="badge bg-danger px-1"
+                                    onClick={() => removeServentFields(index)}
+                                  >
+                                    x
+                                  </span>
+                                </div>
+                              ) : null}
                             </div>
+                          ))}
 
-                            {index ? (
-                              <div className="">
-                                <span
-                                  type="button"
-                                  class="badge bg-danger px-1     "
-                                  onClick={() => removeFormFields(index)}
-                                >
-                                  x
-                                </span>
-                              </div>
-                            ) : null}
-                          </div>
-                        ))}
-
-                        <div className="  d-flex justify-content-end mb-3  ">
-                          <button
-                            type="button"
-                            class="btn btn-secondary btn-sm"
-                            onClick={() => addFormFields()}
-                          >
-                            Add Another One
-                          </button>
-                        </div>
-                      </form>
-
-                      {/* Home servent details  */}
-
-                      <h5 className="text-start">Home Servent Details</h5>
-
-                      <form className="">
-                        {serventValues.map((element, index) => (
-                          <div
-                            className="d-flex gap-1 justify-content-center px-1"
-                            key={index}
-                          >
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Home Servent Name"
-                                name="servant_name"
-                                value={element.servant_name || ""}
-                                onChange={(e) => servantChange(index, e)}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="NID"
-                                name="nid"
-                                value={element.nid || ""}
-                                onChange={(e) => servantChange(index, e)}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Mobile No"
-                                name="mobile"
-                                value={element.mobile || ""}
-                                onChange={(e) => servantChange(index, e)}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Area"
-                                name="area"
-                                value={element.area || ""}
-                                onChange={(e) => servantChange(index, e)}
-                              />
-                            </div>
-                            {index ? (
-                              <div className="">
-                                <span
-                                  type="button"
-                                  class="badge bg-danger px-1"
-                                  onClick={() => removeServentFields(index)}
-                                >
-                                  x
-                                </span>
-                              </div>
-                            ) : null}
-                          </div>
-                        ))}
-
-                        <div className="  d-flex justify-content-end   ">
-                          <button
-                            type="button"
-                            class="btn btn-secondary btn-sm"
-                            onClick={() => addServentFields()}
-                          >
-                            Add Another One
-                          </button>
-                        </div>
-                      </form>
-
-                      {/* ////////Driver Details Form  */}
-
-                      <h5 className="text-start">Driver Details</h5>
-                      <form>
-                        {driverValues.map((element, index) => (
-                          <div
-                            className="d-flex gap-1 justify-content-center   "
-                            key={index}
-                          >
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Driver Name"
-                                name="driver_name"
-                                onChange={(e) => driverChange(index, e)}
-                                value={element.driver_name || ""}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="NID"
-                                name="nid"
-                                onChange={(e) => driverChange(index, e)}
-                                value={element.nid || ""}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Mobile No"
-                                name="mobile"
-                                onChange={(e) => driverChange(index, e)}
-                                value={element.mobile || ""}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Area"
-                                name="area"
-                                //  onClick={() => addServentFields()}
-                                onChange={(e) => driverChange(index, e)}
-                                value={element.area || ""}
-                                // onChange={(e) => servantChange(index, e)}
-                              />
-                            </div>
-
-                            {index ? (
-                              <div className="">
-                                <span
-                                  type="button"
-                                  class="badge bg-danger px-1"
-                                  onClick={() => removeDriverFields(index)}
-                                >
-                                  x
-                                </span>
-                              </div>
-                            ) : null}
-                          </div>
-                        ))}
-
-                        <div className="  d-flex justify-content-end   ">
-                          <button
-                            type="button"
-                            class="btn btn-secondary btn-sm"
-                            onClick={() => addDriverFields()}
-                          >
-                            Add Another One
-                          </button>
-                        </div>
-                      </form>
-
-                      {/* Caretaker Details */}
-
-                      <h5 className="text-start">Caretaker Details</h5>
-                      <form>
-                        {caretakerValues.map((element, index) => (
-                          <div
-                            className="d-flex justify-content-center align-items-center gap-1"
-                            key={index}
-                          >
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Caretaker Name"
-                                name="caretaker_name"
-                                onChange={(e) => caretakerChange(index, e)}
-                                value={element.caretaker_name || ""}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="NID"
-                                name="nid "
-                                onChange={(e) => caretakerChange(index, e)}
-                                value={element.nid || ""}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Mobile No"
-                                name="mobile"
-                                onChange={(e) => caretakerChange(index, e)}
-                                value={element.mobile || ""}
-                              />
-                            </div>
-                            <div class="col-md-3 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Area"
-                                name="area"
-                                onChange={(e) => caretakerChange(index, e)}
-                                value={element.area || ""}
-                              />
-                            </div>
-
-                            {index ? (
-                              <div className="">
-                                <span
-                                  type="button"
-                                  class="badge bg-danger px-1"
-                                  onClick={() => removeCaretakerFields(index)}
-                                >
-                                  x
-                                </span>
-                              </div>
-                            ) : null}
-                          </div>
-                        ))}
-
-                        <div className="  d-flex justify-content-end mb-3   ">
-                          <div className="   ">
+                          <div className="  d-flex justify-content-end   ">
                             <button
                               type="button"
                               class="btn btn-secondary btn-sm"
-                              onClick={() => addCaretakerFields()}
+                              onClick={() => addServentFields()}
                             >
                               Add Another One
                             </button>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
-                      {/* //// Flats Details  */}
-                      <h5 className="text-start">Flats Details</h5>
+                        {/* ////////Driver Details Form  */}
 
-                      <form>
-                        {flateValues.map((element, index) => (
-                          <div
-                            className="d-flex justify-content-center align-items-center gap-1"
-                            key={index}
-                          >
-                            <div class="col-md-4 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="FlateName"
-                                name="flat_name"
-                                onChange={(e) => flateChange(index, e)}
-                                value={element.flat_name || ""}
-                              />
-                            </div>
-                            <div class="col-md-4 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Flate Renter Name"
-                                name="flat_renter_name"
-                                onChange={(e) => flateChange(index, e)}
-                                value={element.flat_renter_name || ""}
-                              />
-                            </div>
-                            <div class="col-md-4 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Refferel Code"
-                                name="referral_code"
-                                onChange={(e) => flateChange(index, e)}
-                                value={element.referral_code || ""}
-                              />
-                            </div>
-
-                            {index ? (
-                              <div className="">
-                                <span
-                                  type="button"
-                                  class="badge bg-danger px-1"
-                                  onClick={() => removeFlateFields(index)}
-                                >
-                                  x
-                                </span>
+                        <h5 className="text-start">Driver Details</h5>
+                        <form>
+                          {driverValues.map((element, index) => (
+                            <div
+                              className="d-flex gap-1 justify-content-center   "
+                              key={index}
+                            >
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Driver Name"
+                                  name="driver_name"
+                                  onChange={(e) => driverChange(index, e)}
+                                  value={element.driver_name || ""}
+                                />
                               </div>
-                            ) : null}
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="NID"
+                                  name="nid"
+                                  onChange={(e) => driverChange(index, e)}
+                                  value={element.nid || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Mobile No"
+                                  name="mobile"
+                                  onChange={(e) => driverChange(index, e)}
+                                  value={element.mobile || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Area"
+                                  name="area"
+                                  //  onClick={() => addServentFields()}
+                                  onChange={(e) => driverChange(index, e)}
+                                  value={element.area || ""}
+                                  // onChange={(e) => servantChange(index, e)}
+                                />
+                              </div>
+
+                              {index ? (
+                                <div className="">
+                                  <span
+                                    type="button"
+                                    class="badge bg-danger px-1"
+                                    onClick={() => removeDriverFields(index)}
+                                  >
+                                    x
+                                  </span>
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+
+                          <div className="  d-flex justify-content-end   ">
+                            <button
+                              type="button"
+                              class="btn btn-secondary btn-sm"
+                              onClick={() => addDriverFields()}
+                            >
+                              Add Another One
+                            </button>
                           </div>
-                        ))}
+                        </form>
 
-                        <div className="  d-flex justify-content-end mb-3   ">
-                          <button
-                            type="button"
-                            class="btn btn-secondary btn-sm"
-                            onClick={() => addFlateFields()}
-                          >
-                            Add Another One
-                          </button>
+                        {/* Caretaker Details */}
+
+                        <h5 className="text-start">Caretaker Details</h5>
+                        <form>
+                          {caretakerValues.map((element, index) => (
+                            <div
+                              className="d-flex justify-content-center align-items-center gap-1"
+                              key={index}
+                            >
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Caretaker Name"
+                                  name="caretaker_name"
+                                  onChange={(e) => caretakerChange(index, e)}
+                                  value={element.caretaker_name || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="NID"
+                                  name="nid "
+                                  onChange={(e) => caretakerChange(index, e)}
+                                  value={element.nid || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Mobile No"
+                                  name="mobile"
+                                  onChange={(e) => caretakerChange(index, e)}
+                                  value={element.mobile || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Area"
+                                  name="area"
+                                  onChange={(e) => caretakerChange(index, e)}
+                                  value={element.area || ""}
+                                />
+                              </div>
+
+                              {index ? (
+                                <div className="">
+                                  <span
+                                    type="button"
+                                    class="badge bg-danger px-1"
+                                    onClick={() => removeCaretakerFields(index)}
+                                  >
+                                    x
+                                  </span>
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+
+                          <div className="  d-flex justify-content-end mb-3   ">
+                            <div className="   ">
+                              <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                                onClick={() => addCaretakerFields()}
+                              >
+                                Add Another One
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+
+                        {/* //// Flats Details  */}
+                        <h5 className="text-start">Flats Details</h5>
+
+                        <form>
+                          {flateValues.map((element, index) => (
+                            <div
+                              className="d-flex justify-content-center align-items-center gap-1"
+                              key={index}
+                            >
+                              <div class="col-md-4 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="FlateName"
+                                  name="flat_name"
+                                  onChange={(e) => flateChange(index, e)}
+                                  value={element.flat_name || ""}
+                                />
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Flate Renter Name"
+                                  name="flat_renter_name"
+                                  onChange={(e) => flateChange(index, e)}
+                                  value={element.flat_renter_name || ""}
+                                />
+                              </div>
+                              <div class="col-md-4 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Refferel Code"
+                                  name="referral_code"
+                                  onChange={(e) => flateChange(index, e)}
+                                  value={element.referral_code || ""}
+                                />
+                              </div>
+
+                              {index ? (
+                                <div className="">
+                                  <span
+                                    type="button"
+                                    class="badge bg-danger px-1"
+                                    onClick={() => removeFlateFields(index)}
+                                  >
+                                    x
+                                  </span>
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+
+                          <div className="  d-flex justify-content-end mb-3   ">
+                            <button
+                              type="button"
+                              class="btn btn-secondary btn-sm"
+                              onClick={() => addFlateFields()}
+                            >
+                              Add Another One
+                            </button>
+                          </div>
+                        </form>
+
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder=" Date(D-M-Y)"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="land_lord_form_submit_date"
+                            value={formData.land_lord_form_submit_date}
+                          />
                         </div>
-                      </form>
+                        <div class="col-md-6 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Signature of Rent Person"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="land_lord_signature"
+                            value={formData.land_lord_signature}
+                          />
+                        </div>
 
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder=" Date(D-M-Y)"
-                          onChange={(e) => handleChangeTwo(e)}
-                           
- 
-                          name="land_lord_form_submit_date"
-                          value={formData.land_lord_form_submit_date}
-                        />
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <input
-                          type="text"
-                          class="form-control"
-                          placeholder="Signature of Rent Person"
-                          onChange={(e) => handleChangeTwo(e)}
-                          name="land_lord_signature"
-                          value={formData.land_lord_signature}
-                        />
-                      </div>
-
-                      <div className="  d-flex justify-content-end mb-3  ">
-                        <input  type="submit" class="btn btn-secondary btn-sm  " value="Save & Continue"/>
-                  
-                         
+                        <div className="  d-flex justify-content-end mb-3  ">
+                          <input
+                            type="submit"
+                            class="btn btn-secondary btn-sm  "
+                            value="Save & Continue"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-
-
                 </form>
               </div>
             </div>
