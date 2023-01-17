@@ -657,7 +657,7 @@ const AddLandLord = () => {
                               class="form-check-label"
                               for="exampleRadios1"
                             >
-                              Forengir
+                              Foreigner
                             </label>
                             </div>
                             
@@ -672,23 +672,32 @@ const AddLandLord = () => {
                                 value={formData.passport}
                               />
                             </div>
-                          ) : null}
+                          ) : <div class="col-md-12 mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="NID/BC"
+                            onChange={(e) => handleChangeTwo(e)}
+                            name="nid"
+                            value={formData.nid}
+                          />
+                        </div>}
                           </div>
                           </div>
                          
                           
                         </div>
 
-                        <div class="col-md-12 mb-3">
+                        {/* <div class="col-md-12 mb-3">
                           <input
                             type="text"
                             class="form-control"
-                            placeholder="NID"
+                            placeholder="NID/BC"
                             onChange={(e) => handleChangeTwo(e)}
                             name="nid"
                             value={formData.nid}
                           />
-                        </div>
+                        </div> */}
 
                         {/* ////Emergency Contact  */}
 
@@ -717,7 +726,7 @@ const AddLandLord = () => {
                           <input
                             type="text"
                             class="form-control"
-                            placeholder="NID"
+                            placeholder="NID/BC"
                             onChange={(e) => handleChangeEmergency(e)}
                             name="nid"
                             value={emergencyData.nid}
