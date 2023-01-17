@@ -118,6 +118,12 @@ const AddLandLord = () => {
     { housetutor_name: "", nid: "", mobile: "", area: "" },
   ]);
 
+
+/// Security 
+  const [securityValues, setsecurityValues] = useState([
+    { security_name: "", nid: "", mobile: "", area: "" },
+  ]);
+
   ///Flate state
   const [flateValues, setflateValues] = useState([
     { flate_name: "", flate_renter_name: "", refferel_code: "" },
@@ -206,10 +212,6 @@ const AddLandLord = () => {
     ]);
   };
 
-
-
-  
-
   let removeCaretakerFields = (i) => {
     let newCaretakerValues = [...caretakerValues];
     newCaretakerValues.splice(i, 1);
@@ -225,21 +227,46 @@ const AddLandLord = () => {
     newhouseTutorValues[i][e.target.name] = e.target.value;
     setcHouseTutorValus(newhouseTutorValues);
   };
+ 
+
+
   let addHouseTutorFields = () => {
     setcHouseTutorValus([
       ...houseTutorValues,
       { housetutor_name: "", nid: "", mobile: "", area: "" },
     ]);
   };
-  // let removeHouseTutorFields = (i) => {
-  //   let newhouseTutorValues = [...houseTutorValues];
-  //   newhouseTutorValues.splice(i, 1);
-  //   setcHouseTutorValus(houseTutorValues);
-  // };
+ 
   let removeHouseTutorFields = (i) => {
     let newhouseTutorValues = [...houseTutorValues];
     newhouseTutorValues.splice(i, 1);
     setcHouseTutorValus(newhouseTutorValues);
+  };
+
+
+  ////// Security 
+
+  let securityChange = (i, e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    let newSecurityValues = [...securityValues];
+    newSecurityValues[i][e.target.name] = e.target.value;
+    setsecurityValues(newSecurityValues);
+  };
+
+
+  let addSecurityFields = () => {
+    setsecurityValues([
+      ...securityValues,
+      { security_name: "", nid: "", mobile: "", area: "" },
+    ]);
+  };
+
+
+  let removeSecurityFields = (i) => {
+    let newSecurityValues = [...securityValues];
+    newSecurityValues.splice(i, 1);
+    setsecurityValues(newSecurityValues);
   };
 
 
@@ -1699,7 +1726,9 @@ const AddLandLord = () => {
                                   <span
                                     type="button"
                                     class="badge bg-danger px-1"
-                                    onClick={() => removeHouseTutorFields(index)}
+                                    onClick={() =>
+                                      removeHouseTutorFields(index)
+                                    }
                                   >
                                     x
                                   </span>
@@ -1714,6 +1743,164 @@ const AddLandLord = () => {
                                 type="button"
                                 class="btn btn-secondary btn-sm"
                                 onClick={() => addHouseTutorFields()}
+                              >
+                                Add Another One
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+
+                        {/* ////// Securtiy Details  */}
+
+                        <h5 className="text-start">Securtiy Details</h5>
+
+                        <div className="row">
+                          <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_divisions"
+                                  id="divisions"
+                                  for="divisions"
+                                  onChange={(e) => handleDivision(e)}
+                                >
+                                  <option disabled selected>
+                                    ----Select Division----
+                                  </option>
+                                  {countries.map((country) => (
+                                    <option
+                                      key={country.id}
+                                      value={country.id}
+                                      country={country}
+                                    >
+                                      {country.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_district"
+                                  id="district"
+                                  for="divisions"
+                                >
+                                  <option disabled selected>
+                                    Select District
+                                  </option>
+                                  {districts.map((district) => (
+                                    <option
+                                      key={district.id}
+                                      value={district.id}
+                                      district={district}
+                                    >
+                                      {district.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-4   ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_thana"
+                                  id="thana"
+                                  for="divisions"
+                                >
+                                  <option disabled selected>
+                                    Select Thana
+                                  </option>
+                                  {thanas.map((thana) => (
+                                    <option
+                                      key={thana.id}
+                                      value={thana.id}
+                                      thana={thana}
+                                    >
+                                      {thana.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <form>
+                          {securityValues.map((element, index) => (
+                            <div
+                              className="d-flex justify-content-center align-items-center gap-1"
+                              key={index}
+                            >
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Security Name"
+                                  name="security_name"
+                                  onChange={(e) => securityChange(index, e)}
+                                  value={element.security_name || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="NID/BC"
+                                  name="nid "
+                                  onChange={(e) => securityChange(index, e)}
+                                  value={element.nid || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Mobile No"
+                                  name="mobile"
+                                  onChange={(e) => securityChange(index, e)}
+                                  value={element.mobile || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Area"
+                                  name="area"
+                                  onChange={(e) => securityChange(index, e)}
+                                  value={element.area || ""}
+                                />
+                              </div>
+
+                              {index ? (
+                                <div className="">
+                                  <span
+                                    type="button"
+                                    class="badge bg-danger px-1"
+                                    onClick={() =>
+                                      removeSecurityFields(index)
+                                    }
+                                  >
+                                    x
+                                  </span>
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+
+                          <div className="  d-flex justify-content-end mb-3   ">
+                            <div className="   ">
+                              <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                                onClick={() => addSecurityFields()}
                               >
                                 Add Another One
                               </button>
