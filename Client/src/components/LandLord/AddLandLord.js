@@ -1229,7 +1229,7 @@ const AddLandLord = () => {
                                 <input
                                   type="text"
                                   class="form-control"
-                                  placeholder="NID"
+                                  placeholder="NID/BC"
                                   name="nid"
                                   value={element.nid || ""}
                                   onChange={(e) => servantChange(index, e)}
@@ -1382,7 +1382,7 @@ const AddLandLord = () => {
                                 <input
                                   type="text"
                                   class="form-control"
-                                  placeholder="NID"
+                                  placeholder="NID/BC"
                                   name="nid"
                                   onChange={(e) => driverChange(index, e)}
                                   value={element.nid || ""}
@@ -1538,7 +1538,7 @@ const AddLandLord = () => {
                                 <input
                                   type="text"
                                   class="form-control"
-                                  placeholder="NID"
+                                  placeholder="NID/BC"
                                   name="nid "
                                   onChange={(e) => caretakerChange(index, e)}
                                   value={element.nid || ""}
