@@ -19,8 +19,6 @@ const AddLandLord = () => {
     setfTopping(e.target.value);
   };
 
-  
-
   const submitForm = (e) => {
     e.preventDefault();
     console.log("user", e.target.username.value);
@@ -113,6 +111,13 @@ const AddLandLord = () => {
   const [caretakerValues, setcaretakerValus] = useState([
     { caretaker_name: "", nid: "", mobile: "", area: "" },
   ]);
+
+  ////.House Tutor
+
+  const [houseTutorValues, setcHouseTutorValus] = useState([
+    { housetutor_name: "", nid: "", mobile: "", area: "" },
+  ]);
+
   ///Flate state
   const [flateValues, setflateValues] = useState([
     { flate_name: "", flate_renter_name: "", refferel_code: "" },
@@ -191,7 +196,7 @@ const AddLandLord = () => {
     console.log(e.target.value);
     let newCaretakerValues = [...caretakerValues];
     newCaretakerValues[i][e.target.name] = e.target.value;
-    setdriverValues(newCaretakerValues);
+    setcaretakerValus(newCaretakerValues);
   };
 
   let addCaretakerFields = () => {
@@ -201,11 +206,44 @@ const AddLandLord = () => {
     ]);
   };
 
+
+
+  
+
   let removeCaretakerFields = (i) => {
     let newCaretakerValues = [...caretakerValues];
     newCaretakerValues.splice(i, 1);
     setcaretakerValus(newCaretakerValues);
   };
+
+  ////House Tutor
+
+  let housetutorChange = (i, e) => {
+    console.log(e.target.name);
+    console.log(e.target.value);
+    let newhouseTutorValues = [...houseTutorValues];
+    newhouseTutorValues[i][e.target.name] = e.target.value;
+    setcHouseTutorValus(newhouseTutorValues);
+  };
+  let addHouseTutorFields = () => {
+    setcHouseTutorValus([
+      ...houseTutorValues,
+      { housetutor_name: "", nid: "", mobile: "", area: "" },
+    ]);
+  };
+  let removeHouseTutorFields = (i) => {
+    let newhouseTutorValues = [...houseTutorValues];
+    newhouseTutorValues.splice(i, 1);
+    setcHouseTutorValus(houseTutorValues);
+  };
+
+
+
+
+
+
+
+
 
   ////flate add
 
@@ -632,31 +670,29 @@ const AddLandLord = () => {
                         <div className="d-flex mt-2 mb-3  gap-5   ">
                           <h6>Nationality</h6>
                           <div class="form-check">
-                          <input
-                            type="radio"
-                            name="topping"
-                            value="Bangladeshi"
-                            id="bangladeshi"
-                            checked={topping === "Bangladeshi"}
-                            onChange={onOptionChange}
-                          />
-                          <label htmlFor="bangladeshi">Bangladeshi</label>
+                            <input
+                              type="radio"
+                              name="topping"
+                              value="Bangladeshi"
+                              id="bangladeshi"
+                              checked={topping === "Bangladeshi"}
+                              onChange={onOptionChange}
+                            />
+                            <label htmlFor="bangladeshi">Bangladeshi</label>
 
-                          <input
-                            type="radio"
-                            name="topping"
-                            value="Foreigner"
-                            id="foreigner"
-                            checked={topping === "Foreigner"}
-                            onChange={onOptionChange}
-                          />
-                          <label htmlFor="foreigner">Foreigner</label>
+                            <input
+                              type="radio"
+                              name="topping"
+                              value="Foreigner"
+                              id="foreigner"
+                              checked={topping === "Foreigner"}
+                              onChange={onOptionChange}
+                            />
+                            <label htmlFor="foreigner">Foreigner</label>
                           </div>
                           <div class="form-check">
                             <div className="d-flex gap-5">
-                              <div>
-                                
-                              </div>
+                              <div></div>
 
                               {topping === "Foreigner" ? (
                                 <div class="col-md-12 mb-3">
@@ -767,69 +803,59 @@ const AddLandLord = () => {
                         <h5 className="text-start">Family / Roomate Details</h5>
 
                         <div className="row">
+                          <div className="d-flex mt-2 mb-3  gap-5   ">
+                            <h6>Nationality</h6>
+                            <div class="form-check">
+                              <input
+                                type="radio"
+                                name="ftopping"
+                                value="FBangladeshi"
+                                id="fbangladeshi"
+                                checked={ftopping === "FBangladeshi"}
+                                onChange={onOptionfChange}
+                              />
+                              <label htmlFor="fbangladeshi">Bangladeshi</label>
 
+                              <input
+                                type="radio"
+                                name="ftopping"
+                                value="FForeigner"
+                                id="foreigner"
+                                checked={ftopping === "FForeigner"}
+                                onChange={onOptionfChange}
+                              />
+                              <label htmlFor="fforeigner">Foreigner</label>
+                            </div>
+                            <div class="form-check">
+                              <div className="d-flex gap-5">
+                                <div></div>
 
-
-
-
-
-
-                        <div className="d-flex mt-2 mb-3  gap-5   ">
-                          <h6>Nationality</h6>
-                          <div class="form-check">
-                          <input
-                            type="radio"
-                            name="ftopping"
-                            value="FBangladeshi"
-                            id="fbangladeshi"
-                            checked={ftopping === "FBangladeshi"}
-                            onChange={onOptionfChange}
-                          />
-                          <label htmlFor="fbangladeshi">Bangladeshi</label>
-
-                          <input
-                            type="radio"
-                            name="ftopping"
-                            value="FForeigner"
-                            id="foreigner"
-                            checked={ftopping === "FForeigner"}
-                            onChange={onOptionfChange}
-                          />
-                          <label htmlFor="fforeigner">Foreigner</label>
-                          </div>
-                          <div class="form-check">
-                            <div className="d-flex gap-5">
-                              <div>
-                                
+                                {ftopping === "FForeigner" ? (
+                                  <div class="col-md-12 mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Passport "
+                                      onChange={(e) => handleChangeTwo(e)}
+                                      name="passport"
+                                      value={formData.passport}
+                                    />
+                                  </div>
+                                ) : (
+                                  <div class="col-md-12 mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="NID/BC"
+                                      onChange={(e) => handleChangeTwo(e)}
+                                      name="nid"
+                                      value={formData.nid}
+                                    />
+                                  </div>
+                                )}
                               </div>
-
-                              {ftopping === "FForeigner" ? (
-                                <div class="col-md-12 mb-3">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Passport "
-                                    onChange={(e) => handleChangeTwo(e)}
-                                    name="passport"
-                                    value={formData.passport}
-                                  />
-                                </div>
-                              ) : (
-                                <div class="col-md-12 mb-3">
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="NID/BC"
-                                    onChange={(e) => handleChangeTwo(e)}
-                                    name="nid"
-                                    value={formData.nid}
-                                  />
-                                </div>
-                              )}
                             </div>
                           </div>
-                        </div>
-
 
                           {/* <div className="d-flex mt-2 mb-3  gap-5   ">
                             <h6>Nationality</h6>
@@ -1535,6 +1561,162 @@ const AddLandLord = () => {
                           </div>
                         </form>
 
+                        {/* House Tutor Details  */}
+
+                        <h5 className="text-start">House Tutor Details</h5>
+
+                        <div className="row">
+                          <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_divisions"
+                                  id="divisions"
+                                  for="divisions"
+                                  onChange={(e) => handleDivision(e)}
+                                >
+                                  <option disabled selected>
+                                    ----Select Division----
+                                  </option>
+                                  {countries.map((country) => (
+                                    <option
+                                      key={country.id}
+                                      value={country.id}
+                                      country={country}
+                                    >
+                                      {country.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4  ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_district"
+                                  id="district"
+                                  for="divisions"
+                                >
+                                  <option disabled selected>
+                                    Select District
+                                  </option>
+                                  {districts.map((district) => (
+                                    <option
+                                      key={district.id}
+                                      value={district.id}
+                                      district={district}
+                                    >
+                                      {district.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-4   ">
+                              <div class="col-sm-10">
+                                <select
+                                  class="form-select"
+                                  aria-label="Default select example"
+                                  name="m_thana"
+                                  id="thana"
+                                  for="divisions"
+                                >
+                                  <option disabled selected>
+                                    Select Thana
+                                  </option>
+                                  {thanas.map((thana) => (
+                                    <option
+                                      key={thana.id}
+                                      value={thana.id}
+                                      thana={thana}
+                                    >
+                                      {thana.name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <form>
+                          {houseTutorValues.map((element, index) => (
+                            <div
+                              className="d-flex justify-content-center align-items-center gap-1"
+                              key={index}
+                            >
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="House Tutor Name"
+                                  name="housetutor_name"
+                                  onChange={(e) => housetutorChange(index, e)}
+                                  value={element.caretaker_name || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="NID/BC"
+                                  name="nid "
+                                  onChange={(e) => housetutorChange(index, e)}
+                                  value={element.nid || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Mobile No"
+                                  name="mobile"
+                                  onChange={(e) => housetutorChange(index, e)}
+                                  value={element.mobile || ""}
+                                />
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Area"
+                                  name="area"
+                                  onChange={(e) => housetutorChange(index, e)}
+                                  value={element.area || ""}
+                                />
+                              </div>
+
+                              {index ? (
+                                <div className="">
+                                  <span
+                                    type="button"
+                                    class="badge bg-danger px-1"
+                                    onClick={() => removeHouseTutorFields(index)}
+                                  >
+                                    x
+                                  </span>
+                                </div>
+                              ) : null}
+                            </div>
+                          ))}
+
+                          <div className="  d-flex justify-content-end mb-3   ">
+                            <div className="   ">
+                              <button
+                                type="button"
+                                class="btn btn-secondary btn-sm"
+                                onClick={() => addHouseTutorFields()}
+                              >
+                                Add Another One
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+
                         {/* //// Flats Details  */}
                         <h5 className="text-start">Flats Details</h5>
 
@@ -1620,44 +1802,6 @@ const AddLandLord = () => {
                             value={formData.land_lord_signature}
                           />
                         </div>
-
-                        {/* <div className="App">
-                          <h3>Select Pizza Size</h3>
-
-                          <input
-                            type="radio"
-                            name="topping"
-                            value="Regular"
-                            id="regular"
-                            checked={topping === "Regular"}
-                            onChange={onOptionChange}
-                          />
-                          <label htmlFor="regular">Regular</label>
-
-                          <input
-                            type="radio"
-                            name="topping"
-                            value="Medium"
-                            id="medium"
-                            checked={topping === "Medium"}
-                            onChange={onOptionChange}
-                          />
-                          <label htmlFor="medium">Medium</label>
-
-                          <input
-                            type="radio"
-                            name="topping"
-                            value="Large"
-                            id="large"
-                            checked={topping === "Large"}
-                            onChange={onOptionChange}
-                          />
-                          <label htmlFor="large">Large</label>
-
-                          <p>
-                            Select topping <strong>{topping}</strong>
-                          </p>
-                        </div> */}
 
                         <div className="  d-flex justify-content-end mb-3  ">
                           <input
