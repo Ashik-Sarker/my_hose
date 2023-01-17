@@ -5,7 +5,17 @@ const AddLandLord = () => {
   const [divisionid, setDivisionId] = useState("");
   const [districts, setDistrict] = useState([]);
   const [thanas, setThana] = useState([]);
-  const [nationality, setNationality] = useState(false);
+  const [nationality, setNationality] = useState("lb");
+  const [familynationality, setFamilyNationality] = useState(false);
+  //const [gender, setGender] = useState("lb");
+
+  const [topping, setTopping] = useState("Bangladeshi");
+
+  const onOptionChange = (e) => {
+    setTopping(e.target.value);
+  };
+
+  
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -617,75 +627,61 @@ const AddLandLord = () => {
                       </div>  */}
                         <div className="d-flex mt-2 mb-3  gap-5   ">
                           <h6>Nationality</h6>
+                          <div class=" d-flex">
                           <div class="form-check">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="r_yes"
-                              id=" "
-                              value=" "
-                              onClick={() => {
-                                // setOldReferelYes(true);
-                                // // setOldReferelYes(!true);
-                                setNationality(false);
-                              }}
-                              checked
-                            />
-                            <label
-                              class="form-check-label"
-                              for="exampleRadios1"
-                            >
-                              Bangladeshi
-                            </label>
+                          <input
+                            type="radio"
+                            name="topping"
+                            value="Bangladeshi"
+                            id="bangladeshi"
+                            checked={topping === "Bangladeshi"}
+                            onChange={onOptionChange}
+                          />
+                          <label htmlFor="bangladeshi">Bangladeshi</label>
+                      </div> 
+                          <div class="form-check">
+                          <input
+                            type="radio"
+                            name="topping"
+                            value="Foreigner"
+                            id="foreigner"
+                            checked={topping === "Foreigner"}
+                            onChange={onOptionChange}
+                          />
+                          <label htmlFor="foreigner">Foreigner</label>
+                          </div>
                           </div>
                           <div class="form-check">
                             <div className="d-flex gap-5">
-                            <div>
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="r_yes"
-                              id=" "
-                              value=" "
-                              onClick={() => {
-                                // setOldReferelYes(true);
-                                // // setOldReferelYes(!true);
-                                setNationality(true);
-                              }}
-                            />
-                            <label
-                              class="form-check-label"
-                              for="exampleRadios1"
-                            >
-                              Foreigner
-                            </label>
+                              <div>
+                                
+                              </div>
+
+                              {topping === "Foreigner" ? (
+                                <div class="col-md-12 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Passport "
+                                    onChange={(e) => handleChangeTwo(e)}
+                                    name="passport"
+                                    value={formData.passport}
+                                  />
+                                </div>
+                              ) : (
+                                <div class="col-md-12 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="NID/BC"
+                                    onChange={(e) => handleChangeTwo(e)}
+                                    name="nid"
+                                    value={formData.nid}
+                                  />
+                                </div>
+                              )}
                             </div>
-                            
-                            {nationality ? (
-                            <div class="col-md-12 mb-3">
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Passport "
-                                onChange={(e) => handleChangeTwo(e)}
-                                name="passport"
-                                value={formData.passport}
-                              />
-                            </div>
-                          ) : <div class="col-md-12 mb-3">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="NID/BC"
-                            onChange={(e) => handleChangeTwo(e)}
-                            name="nid"
-                            value={formData.nid}
-                          />
-                        </div>}
                           </div>
-                          </div>
-                         
-                          
                         </div>
 
                         {/* <div class="col-md-12 mb-3">
@@ -768,8 +764,83 @@ const AddLandLord = () => {
                         {/* Family / Roomate Details */}
 
                         <h5 className="text-start">Family / Roomate Details</h5>
+
                         <div className="row">
-                        <div className="d-flex justify-content-center align-items-center gap-2 py-3  ">
+                          <div className="d-flex mt-2 mb-3  gap-5   ">
+                            <h6>Nationality</h6>
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="r_yes"
+                                id=" "
+                                value=" "
+                                onClick={() => {
+                                  // setOldReferelYes(true);
+                                  // // setOldReferelYes(!true);
+                                  setFamilyNationality(false);
+                                }}
+                                checked
+                              />
+                              <label
+                                class="form-check-label"
+                                for="exampleRadios1"
+                              >
+                                Bangladeshi
+                              </label>
+                            </div>
+
+                            <div class="form-check">
+                              <div className="d-flex gap-5">
+                                <div>
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="r_yes"
+                                    id=" "
+                                    value=" "
+                                    onClick={() => {
+                                      // setOldReferelYes(true);
+                                      // // setOldReferelYes(!true);
+                                      setFamilyNationality(true);
+                                    }}
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="exampleRadios1"
+                                  >
+                                    Foreigner
+                                  </label>
+                                </div>
+
+                                {familynationality ? (
+                                  <div class="col-md-12 mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Passport "
+                                      onChange={(e) => handleChangeTwo(e)}
+                                      name="passport"
+                                      value={formData.passport}
+                                    />
+                                  </div>
+                                ) : (
+                                  <div class="col-md-12 mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="NID/BC"
+                                      onChange={(e) => handleChangeTwo(e)}
+                                      name="nid"
+                                      value={formData.nid}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="d-flex justify-content-center align-items-center gap-2 py-3  ">
                             <div class="col-md-4  ">
                               <div class="col-sm-10">
                                 <select
@@ -845,7 +916,6 @@ const AddLandLord = () => {
                               </div>
                             </div>
                           </div>
-
                         </div>
 
                         <form className="">
@@ -940,7 +1010,7 @@ const AddLandLord = () => {
 
                         <h5 className="text-start">Home Servent Details</h5>
                         <div className="row">
-                        <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
+                          <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
                             <div class="col-md-4  ">
                               <div class="col-sm-10">
                                 <select
@@ -1016,7 +1086,6 @@ const AddLandLord = () => {
                               </div>
                             </div>
                           </div>
-
                         </div>
                         <form className="">
                           {serventValues.map((element, index) => (
@@ -1094,7 +1163,7 @@ const AddLandLord = () => {
                         <h5 className="text-start">Driver Details</h5>
 
                         <div className="row">
-                        <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
+                          <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
                             <div class="col-md-4  ">
                               <div class="col-sm-10">
                                 <select
@@ -1170,7 +1239,6 @@ const AddLandLord = () => {
                               </div>
                             </div>
                           </div>
-
                         </div>
                         <form>
                           {driverValues.map((element, index) => (
@@ -1251,7 +1319,7 @@ const AddLandLord = () => {
                         <h5 className="text-start">Caretaker Details</h5>
 
                         <div className="row">
-                        <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
+                          <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
                             <div class="col-md-4  ">
                               <div class="col-sm-10">
                                 <select
@@ -1327,7 +1395,6 @@ const AddLandLord = () => {
                               </div>
                             </div>
                           </div>
-
                         </div>
                         <form>
                           {caretakerValues.map((element, index) => (
@@ -1488,6 +1555,44 @@ const AddLandLord = () => {
                             value={formData.land_lord_signature}
                           />
                         </div>
+
+                        {/* <div className="App">
+                          <h3>Select Pizza Size</h3>
+
+                          <input
+                            type="radio"
+                            name="topping"
+                            value="Regular"
+                            id="regular"
+                            checked={topping === "Regular"}
+                            onChange={onOptionChange}
+                          />
+                          <label htmlFor="regular">Regular</label>
+
+                          <input
+                            type="radio"
+                            name="topping"
+                            value="Medium"
+                            id="medium"
+                            checked={topping === "Medium"}
+                            onChange={onOptionChange}
+                          />
+                          <label htmlFor="medium">Medium</label>
+
+                          <input
+                            type="radio"
+                            name="topping"
+                            value="Large"
+                            id="large"
+                            checked={topping === "Large"}
+                            onChange={onOptionChange}
+                          />
+                          <label htmlFor="large">Large</label>
+
+                          <p>
+                            Select topping <strong>{topping}</strong>
+                          </p>
+                        </div> */}
 
                         <div className="  d-flex justify-content-end mb-3  ">
                           <input
