@@ -231,12 +231,16 @@ const AddLandLord = () => {
       { housetutor_name: "", nid: "", mobile: "", area: "" },
     ]);
   };
+  // let removeHouseTutorFields = (i) => {
+  //   let newhouseTutorValues = [...houseTutorValues];
+  //   newhouseTutorValues.splice(i, 1);
+  //   setcHouseTutorValus(houseTutorValues);
+  // };
   let removeHouseTutorFields = (i) => {
     let newhouseTutorValues = [...houseTutorValues];
     newhouseTutorValues.splice(i, 1);
-    setcHouseTutorValus(houseTutorValues);
+    setcHouseTutorValus(newhouseTutorValues);
   };
-
 
 
 
@@ -1656,7 +1660,7 @@ const AddLandLord = () => {
                                   placeholder="House Tutor Name"
                                   name="housetutor_name"
                                   onChange={(e) => housetutorChange(index, e)}
-                                  value={element.caretaker_name || ""}
+                                  value={element.housetutor_name || ""}
                                 />
                               </div>
                               <div class="col-md-3 mb-3">
