@@ -10,9 +10,13 @@ const AddLandLord = () => {
   //const [gender, setGender] = useState("lb");
 
   const [topping, setTopping] = useState("Bangladeshi");
+  const [ftopping, setfTopping] = useState("FBangladeshi");
 
   const onOptionChange = (e) => {
     setTopping(e.target.value);
+  };
+  const onOptionfChange = (e) => {
+    setfTopping(e.target.value);
   };
 
   
@@ -627,7 +631,6 @@ const AddLandLord = () => {
                       </div>  */}
                         <div className="d-flex mt-2 mb-3  gap-5   ">
                           <h6>Nationality</h6>
-                          <div class=" d-flex">
                           <div class="form-check">
                           <input
                             type="radio"
@@ -638,8 +641,7 @@ const AddLandLord = () => {
                             onChange={onOptionChange}
                           />
                           <label htmlFor="bangladeshi">Bangladeshi</label>
-                      </div> 
-                          <div class="form-check">
+
                           <input
                             type="radio"
                             name="topping"
@@ -649,7 +651,6 @@ const AddLandLord = () => {
                             onChange={onOptionChange}
                           />
                           <label htmlFor="foreigner">Foreigner</label>
-                          </div>
                           </div>
                           <div class="form-check">
                             <div className="d-flex gap-5">
@@ -766,7 +767,71 @@ const AddLandLord = () => {
                         <h5 className="text-start">Family / Roomate Details</h5>
 
                         <div className="row">
-                          <div className="d-flex mt-2 mb-3  gap-5   ">
+
+
+
+
+
+
+
+                        <div className="d-flex mt-2 mb-3  gap-5   ">
+                          <h6>Nationality</h6>
+                          <div class="form-check">
+                          <input
+                            type="radio"
+                            name="ftopping"
+                            value="FBangladeshi"
+                            id="fbangladeshi"
+                            checked={ftopping === "FBangladeshi"}
+                            onChange={onOptionfChange}
+                          />
+                          <label htmlFor="fbangladeshi">Bangladeshi</label>
+
+                          <input
+                            type="radio"
+                            name="ftopping"
+                            value="FForeigner"
+                            id="foreigner"
+                            checked={ftopping === "FForeigner"}
+                            onChange={onOptionfChange}
+                          />
+                          <label htmlFor="fforeigner">Foreigner</label>
+                          </div>
+                          <div class="form-check">
+                            <div className="d-flex gap-5">
+                              <div>
+                                
+                              </div>
+
+                              {ftopping === "FForeigner" ? (
+                                <div class="col-md-12 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Passport "
+                                    onChange={(e) => handleChangeTwo(e)}
+                                    name="passport"
+                                    value={formData.passport}
+                                  />
+                                </div>
+                              ) : (
+                                <div class="col-md-12 mb-3">
+                                  <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="NID/BC"
+                                    onChange={(e) => handleChangeTwo(e)}
+                                    name="nid"
+                                    value={formData.nid}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+
+                          {/* <div className="d-flex mt-2 mb-3  gap-5   ">
                             <h6>Nationality</h6>
                             <div class="form-check">
                               <input
@@ -838,7 +903,7 @@ const AddLandLord = () => {
                                 )}
                               </div>
                             </div>
-                          </div>
+                          </div> */}
 
                           <div className="d-flex justify-content-center align-items-center gap-2 py-3  ">
                             <div class="col-md-4  ">
