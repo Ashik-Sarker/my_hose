@@ -8,7 +8,54 @@ const AddSublet = () => {
      const [divisionid, setDivisionId] = useState("");
      const [districts, setDistrict] = useState([]);
      const [thanas, setThana] = useState([]);
-   
+     const [topping, setTopping] = useState("Bangladeshi");
+     const [ftopping, setfTopping] = useState("FBangladeshi");
+
+     const handleChangeTwo = (e) => {
+      console.log(e.target.name);
+      console.log(e.target.value);
+      setFormData({ ...formData, [e.target.name]: [e.target.value] });
+    };
+
+     const onOptionChange = (e) => {
+      setTopping(e.target.value);
+    };
+    const onOptionfChange = (e) => {
+      setfTopping(e.target.value);
+    };
+
+    const [formData, setFormData] = useState({
+      owner_name: "",
+      father_name: "",
+      mother_name: "",
+      date_of_birth: "",
+      marital_status: "",
+      occupation: "",
+      religion: "",
+      education: "",
+      mobile: "",
+      email: "",
+      nid: "",
+      passport: "",
+      land_lord_form_submit_date: "",
+      land_lord_signature: "",
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      //city corporation
      const [yesVisible, setVisbleYes] = useState(false);
      const [noVisible, setVisbleNo] = useState(false);
@@ -43,6 +90,19 @@ const AddSublet = () => {
      //   ]);
    
      //// family
+
+
+     const [houseTutorValues, setcHouseTutorValus] = useState([
+      { housetutor_name: "", nid: "", mobile: "", area: "" },
+    ]);
+
+
+
+    const [securityValues, setsecurityValues] = useState([
+      { security_name: "", nid: "", mobile: "", area: "" },
+    ]);
+
+
      let handleChange = (i, e) => {
        let newFormValues = [...formValues];
        newFormValues[i][e.target.name] = e.target.value;
@@ -82,6 +142,7 @@ const AddSublet = () => {
        setserventValues(newServentValues);
      };
    
+
      // Driver Add
    
      let driverChange = (i, e) => {
@@ -122,7 +183,53 @@ const AddSublet = () => {
        newCaretakerValues.splice(i, 1);
        setcaretakerValus(newCaretakerValues);
      };
-   
+     let housetutorChange = (i, e) => {
+      console.log(e.target.name);
+      console.log(e.target.value);
+      let newhouseTutorValues = [...houseTutorValues];
+      newhouseTutorValues[i][e.target.name] = e.target.value;
+      setcHouseTutorValus(newhouseTutorValues);
+    };
+  
+    let addHouseTutorFields = () => {
+      setcHouseTutorValus([
+        ...houseTutorValues,
+        { housetutor_name: "", nid: "", mobile: "", area: "" },
+      ]);
+    };
+  
+    let removeHouseTutorFields = (i) => {
+      let newhouseTutorValues = [...houseTutorValues];
+      newhouseTutorValues.splice(i, 1);
+      setcHouseTutorValus(newhouseTutorValues);
+    };
+
+
+
+    let securityChange = (i, e) => {
+      console.log(e.target.name);
+      console.log(e.target.value);
+      let newSecurityValues = [...securityValues];
+      newSecurityValues[i][e.target.name] = e.target.value;
+      setsecurityValues(newSecurityValues);
+    };
+  
+  
+    let addSecurityFields = () => {
+      setsecurityValues([
+        ...securityValues,
+        { security_name: "", nid: "", mobile: "", area: "" },
+      ]);
+    };
+  
+  
+    let removeSecurityFields = (i) => {
+      let newSecurityValues = [...securityValues];
+      newSecurityValues.splice(i, 1);
+      setsecurityValues(newSecurityValues);
+    };
+
+
      useEffect(() => {
        const getdivision = async () => {
          const resdivision = await fetch(`divisions.json`);
@@ -487,22 +594,59 @@ const AddSublet = () => {
                            />
                          </div>
    
-                         <div class="col-md-12 mb-3">
-                           <input
-                             type="text"
-                             class="form-control"
-                             placeholder="NID"
-                             name="s_nid"
-                           />
-                         </div>
-                         <div class="col-md-12 mb-3">
-                           <input
-                             type="text"
-                             class="form-control"
-                             placeholder="Passport(if you have)"
-                             name="s_pasport"
-                           />
-                         </div>
+                         <div className="d-flex mt-2 mb-3  gap-5   ">
+                        <h6>Nationality</h6>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            name="topping"
+                            value="Bangladeshi"
+                            id="bangladeshi"
+                            checked={topping === "Bangladeshi"}
+                            onChange={onOptionChange}
+                          />
+                          <label htmlFor="bangladeshi">Bangladeshi</label>
+
+                          <input
+                            type="radio"
+                            name="topping"
+                            value="Foreigner"
+                            id="foreigner"
+                            checked={topping === "Foreigner"}
+                            onChange={onOptionChange}
+                          />
+                          <label htmlFor="foreigner">Foreigner</label>
+                        </div>
+                        <div class="form-check">
+                          <div className="d-flex gap-5">
+                            <div></div>
+
+                            {topping === "Foreigner" ? (
+                              <div class="col-md-12 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Passport "
+                                  onChange={(e) => handleChangeTwo(e)}
+                                  name="passport"
+                                  value={formData.passport}
+                                />
+                              </div>
+                            ) : (
+                              <div class="col-md-12 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="NID/BC"
+                                  onChange={(e) => handleChangeTwo(e)}
+                                  name="nid"
+                                  value={formData.nid}
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
    
                          {/* ////Emergency Contact  */}
    
@@ -561,7 +705,138 @@ const AddSublet = () => {
                          {/* Family / Roomate Details */}
    
                          <h5 className="text-start">Family / Roomate Details</h5>
-   
+                         <div className="d-flex mt-2 mb-3  gap-5   ">
+                        <h6>Nationality</h6>
+                        <div class="form-check">
+                          <input
+                            type="radio"
+                            name="ftopping"
+                            value="FBangladeshi"
+                            id="fbangladeshi"
+                            checked={ftopping === "FBangladeshi"}
+                            onChange={onOptionfChange}
+                          />
+                          <label htmlFor="fbangladeshi">Bangladeshi</label>
+
+                          <input
+                            type="radio"
+                            name="ftopping"
+                            value="FForeigner"
+                            id="foreigner"
+                            checked={ftopping === "FForeigner"}
+                            onChange={onOptionfChange}
+                          />
+                          <label htmlFor="fforeigner">Foreigner</label>
+                        </div>
+                        <div class="form-check">
+                          <div className="d-flex gap-5">
+                            <div></div>
+
+                            {ftopping === "FForeigner" ? (
+                              <div class="col-md-12 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="Passport "
+                                  onChange={(e) => handleChangeTwo(e)}
+                                  name="passport"
+                                  value={formData.passport}
+                                />
+                              </div>
+                            ) : (
+                              <div class="col-md-12 mb-3">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="NID/BC"
+                                  onChange={(e) => handleChangeTwo(e)}
+                                  name="nid"
+                                  value={formData.nid}
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="d-flex justify-content-center align-items-center py-3 gap-2">
+                          <div class="col-md-4  ">
+                            <div class="col-sm-10">
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="f_divisions"
+                                id="divisions"
+                                for="divisions"
+                                onChange={(e) => handleDivision(e)}
+                              >
+                                <option disabled selected>
+                                  ----Select Division----
+                                </option>
+                                {countries.map((country) => (
+                                  <option
+                                    key={country.id}
+                                    value={country.id}
+                                    country={country}
+                                  >
+                                    {country.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-4  ">
+                            <div class="col-sm-10">
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="f_district"
+                                id="district"
+                                for="divisions"
+                              >
+                                <option disabled selected>
+                                  Select District
+                                </option>
+                                {districts.map((district) => (
+                                  <option
+                                    key={district.id}
+                                    value={district.id}
+                                    district={district}
+                                  >
+                                    {district.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4   ">
+                            <div class="col-sm-10">
+                              <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="f_thana"
+                                id="thana"
+                                for="divisions"
+                              >
+                                <option disabled selected>
+                                  Select Thana
+                                </option>
+                                {thanas.map((thana) => (
+                                  <option
+                                    key={thana.id}
+                                    value={thana.id}
+                                    thana={thana}
+                                  >
+                                    {thana.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                          <form className="">
                            {formValues.map((element, index) => (
                              <div
@@ -878,6 +1153,337 @@ const AddSublet = () => {
                              </div>
                            </div>
                          </form>
+
+
+
+
+
+{/* House Tutor Details  */}
+
+<h5 className="text-start">House Tutor Details</h5>
+
+<div className="row">
+  <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
+    <div class="col-md-4  ">
+      <div class="col-sm-10">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="m_divisions"
+          id="divisions"
+          for="divisions"
+          onChange={(e) => handleDivision(e)}
+        >
+          <option disabled selected>
+            ----Select Division----
+          </option>
+          {countries.map((country) => (
+            <option
+              key={country.id}
+              value={country.id}
+              country={country}
+            >
+              {country.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4  ">
+      <div class="col-sm-10">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="m_district"
+          id="district"
+          for="divisions"
+        >
+          <option disabled selected>
+            Select District
+          </option>
+          {districts.map((district) => (
+            <option
+              key={district.id}
+              value={district.id}
+              district={district}
+            >
+              {district.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4   ">
+      <div class="col-sm-10">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="m_thana"
+          id="thana"
+          for="divisions"
+        >
+          <option disabled selected>
+            Select Thana
+          </option>
+          {thanas.map((thana) => (
+            <option
+              key={thana.id}
+              value={thana.id}
+              thana={thana}
+            >
+              {thana.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<form>
+  {houseTutorValues.map((element, index) => (
+    <div
+      className="d-flex justify-content-center align-items-center gap-1"
+      key={index}
+    >
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="House Tutor Name"
+          name="housetutor_name"
+          onChange={(e) => housetutorChange(index, e)}
+          value={element.housetutor_name || ""}
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="NID/BC"
+          name="nid "
+          onChange={(e) => housetutorChange(index, e)}
+          value={element.nid || ""}
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Mobile No"
+          name="mobile"
+          onChange={(e) => housetutorChange(index, e)}
+          value={element.mobile || ""}
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Area"
+          name="area"
+          onChange={(e) => housetutorChange(index, e)}
+          value={element.area || ""}
+        />
+      </div>
+
+      {index ? (
+        <div className="">
+          <span
+            type="button"
+            class="badge bg-danger px-1"
+            onClick={() => removeHouseTutorFields(index)}
+          >
+            x
+          </span>
+        </div>
+      ) : null}
+    </div>
+  ))}
+
+  <div className="  d-flex justify-content-end mb-3   ">
+    <div className="   ">
+      <button
+        type="button"
+        class="btn btn-secondary btn-sm"
+        onClick={() => addHouseTutorFields()}
+      >
+        Add Another One
+      </button>
+    </div>
+  </div>
+</form>
+
+{/* ////// Securtiy Details  */}
+
+<h5 className="text-start">Securtiy Details</h5>
+
+<div className="row">
+  <div className="d-flex justify-content-center align-items-center gap-3 py-3  ">
+    <div class="col-md-4  ">
+      <div class="col-sm-10">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="m_divisions"
+          id="divisions"
+          for="divisions"
+          onChange={(e) => handleDivision(e)}
+        >
+          <option disabled selected>
+            ----Select Division----
+          </option>
+          {countries.map((country) => (
+            <option
+              key={country.id}
+              value={country.id}
+              country={country}
+            >
+              {country.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4  ">
+      <div class="col-sm-10">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="m_district"
+          id="district"
+          for="divisions"
+        >
+          <option disabled selected>
+            Select District
+          </option>
+          {districts.map((district) => (
+            <option
+              key={district.id}
+              value={district.id}
+              district={district}
+            >
+              {district.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4   ">
+      <div class="col-sm-10">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="m_thana"
+          id="thana"
+          for="divisions"
+        >
+          <option disabled selected>
+            Select Thana
+          </option>
+          {thanas.map((thana) => (
+            <option
+              key={thana.id}
+              value={thana.id}
+              thana={thana}
+            >
+              {thana.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<form>
+  {securityValues.map((element, index) => (
+    <div
+      className="d-flex justify-content-center align-items-center gap-1"
+      key={index}
+    >
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Security Name"
+          name="security_name"
+          onChange={(e) => securityChange(index, e)}
+          value={element.security_name || ""}
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="NID/BC"
+          name="nid "
+          onChange={(e) => securityChange(index, e)}
+          value={element.nid || ""}
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Mobile No"
+          name="mobile"
+          onChange={(e) => securityChange(index, e)}
+          value={element.mobile || ""}
+        />
+      </div>
+      <div class="col-md-3 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Area"
+          name="area"
+          onChange={(e) => securityChange(index, e)}
+          value={element.area || ""}
+        />
+      </div>
+
+      {index ? (
+        <div className="">
+          <span
+            type="button"
+            class="badge bg-danger px-1"
+            onClick={() =>
+              removeSecurityFields(index)
+            }
+          >
+            x
+          </span>
+        </div>
+      ) : null}
+    </div>
+  ))}
+
+  <div className="  d-flex justify-content-end mb-3   ">
+    <div className="   ">
+      <button
+        type="button"
+        class="btn btn-secondary btn-sm"
+        onClick={() => addSecurityFields()}
+      >
+        Add Another One
+      </button>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
    
                          {/* Additional Information */}
    
